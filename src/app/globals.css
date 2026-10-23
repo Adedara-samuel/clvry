@@ -210,6 +210,20 @@ body::after {
   animation: spin-slow 12s linear infinite;
 }
 
+/* Hero cross: slow float so the page feels alive even when nobody moves the mouse. */
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.hero-float {
+  animation: hero-float 6s ease-in-out infinite;
+}
+
 /* ---------- Intro: "Bring Christ to the street" ---------- */
 
 /* Seen this session (flag set by the init script) → never paint it. */
@@ -276,6 +290,7 @@ html:not([data-intro="seen"]) body {
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-spin-slow,
+  .hero-float,
   .intro-road {
     animation: none;
   }

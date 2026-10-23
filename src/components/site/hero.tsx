@@ -1,6 +1,7 @@
 import { CrossMark, Wordmark } from "@/components/brand/logo";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { PointerStage } from "./pointer-stage";
 
 const cta = "h-12 px-8 font-mono text-[11px] uppercase tracking-[0.25em]";
 
@@ -57,6 +58,6 @@ export function Hero() {
           See what&apos;s coming
         </a>
       </div>
-    </section>
+    </PointerStage>
   );
 }
