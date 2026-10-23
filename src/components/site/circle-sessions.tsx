@@ -1,8 +1,9 @@
 "use client";
 
 import { HeartLogo } from "@/components/brand/logo";
-import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useTracks } from "@/lib/queries";
+import { cn } from "@/lib/utils";
 import { useUi } from "@/store/ui";
 
 export function CircleSessions() {
@@ -31,14 +32,18 @@ export function CircleSessions() {
       <div>
         <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-gold">Circle Sessions · Vol. 01</p>
         <h2 className="mt-3 font-display text-3xl uppercase md:text-5xl">Music for the circle</h2>
-        <p className="mt-6 max-w-md leading-relaxed text-bone/70">
+        <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
           Live worship recorded in the round — no stage, no front row. Godly sound from the people who
           wear the cross. First volume streaming soon.
         </p>
 
-        <ol className="mt-10 divide-y divide-bone/10 border-y border-bone/10">
+        <ol className="mt-10 divide-y divide-border border-y border-border">
           {isPending
-            ? Array.from({ length: 4 }, (_, i) => <li key={i} className="h-14 animate-pulse" />)
+            ? Array.from({ length: 4 }, (_, i) => (
+                <li key={i} className="py-4">
+                  <Skeleton className="h-6" />
+                </li>
+              ))
             : tracks?.map((t) => {
                 const active = t.id === activeTrackId;
                 return (
@@ -49,16 +54,16 @@ export function CircleSessions() {
                       aria-pressed={active && playing}
                       className="group flex w-full items-center gap-5 py-4 text-left"
                     >
-                      <span className={cn("w-6 font-mono text-xs", active ? "text-gold" : "text-bone/40")}>
+                      <span className={cn("w-6 font-mono text-xs", active ? "text-gold" : "text-muted-foreground")}>
                         {active && playing ? "❚❚" : t.id}
                       </span>
                       <span className={cn("flex-1 uppercase tracking-wide transition group-hover:text-gold", active && "text-gold")}>
                         {t.title}
                       </span>
-                      <span className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-bone/40 sm:inline">
+                      <span className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground sm:inline">
                         {t.scripture}
                       </span>
-                      <span className="font-mono text-xs text-bone/50">{t.duration}</span>
+                      <span className="font-mono text-xs text-muted-foreground">{t.duration}</span>
                     </button>
                   </li>
                 );
