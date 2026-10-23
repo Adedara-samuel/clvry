@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Geist, Geist_Mono } from "next/font/google";
-import { Intro, introInitScript } from "@/components/site/intro";
+import { Intro } from "@/components/site/intro";
+import { introInitScript } from "@/lib/intro";
 import { Toaster } from "@/components/ui/sonner";
 import { themeInitScript } from "@/store/theme";
 import { Providers } from "./providers";

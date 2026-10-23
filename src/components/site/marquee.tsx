@@ -1,4 +1,4 @@
-const words = ["Wear the Word", "Drop 001", "Circle Sessions", "Sanctuary", "Galatians 6:14"];
+const words = ["Bring Christ to the Street", "Coming Soon", "Drop 001", "Circle Sessions", "Galatians 6:14"];
 
 export function Marquee() {
   // Content is doubled so the -50% translate loops seamlessly.

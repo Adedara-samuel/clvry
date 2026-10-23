@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useSubscribe } from "@/lib/queries";
 import { subscribeSchema } from "@/lib/schemas";
 
@@ -17,48 +21,56 @@ export function Newsletter() {
       return;
     }
     setError(null);
-    subscribe.mutate(parsed.data, { onSuccess: () => setEmail("") });
+    subscribe.mutate(parsed.data, {
+      onSuccess: () => {
+        setEmail("");
+        toast.success("You're on the list. Grace and peace.");
+      },
+      onError: (err) => toast.error(err.message),
+    });
   }
 
-  const message = error ?? subscribe.error?.message;
-
   return (
-    <section className="bg-wine px-5 py-24 text-center text-paper">
+    <section id="notify" className="scroll-mt-16 bg-wine px-5 py-24 text-center text-paper">
       <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-goldenrod">The list</p>
       <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl uppercase md:text-4xl">
         First to the drop. First in the circle.
       </h2>
+      <p className="mx-auto mt-4 max-w-md text-sm text-paper/70">
+        The shop, Circle Sessions and the lookbook are coming soon. Leave your email and we&apos;ll tell you
+        the moment they open.
+      </p>
 
       {subscribe.isSuccess ? (
         <p className="mt-10 font-mono text-xs uppercase tracking-[0.25em] text-goldenrod">You&apos;re in. Grace and peace.</p>
       ) : (
         <form onSubmit={onSubmit} noValidate className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row">
-          <label htmlFor="email" className="sr-only">
+          <Label htmlFor="email" className="sr-only">
             Email address
-          </label>
-          <input
+          </Label>
+          <Input
             id="email"
             type="email"
             autoComplete="email"
             placeholder="Email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            aria-invalid={Boolean(message)}
-            aria-describedby={message ? "email-error" : undefined}
-            className="flex-1 border border-paper/30 bg-transparent px-4 py-3 text-sm placeholder:text-paper/50 focus:border-goldenrod focus:outline-none"
+            aria-invalid={Boolean(error)}
+            aria-describedby={error ? "email-error" : undefined}
+            className="h-12 flex-1 border-paper/30 bg-transparent text-paper placeholder:text-paper/50 focus-visible:border-goldenrod focus-visible:ring-goldenrod/40 dark:bg-transparent"
           />
-          <button
+          <Button
             type="submit"
             disabled={subscribe.isPending}
-            className="bg-goldenrod px-6 py-3 font-mono text-[11px] uppercase tracking-[0.25em] text-night transition hover:bg-paper disabled:opacity-60"
+            className="h-12 bg-goldenrod px-6 font-mono text-[11px] uppercase tracking-[0.25em] text-night hover:bg-paper"
           >
             {subscribe.isPending ? "Joining…" : "Join"}
-          </button>
+          </Button>
         </form>
       )}
-      {message && (
+      {error && (
         <p id="email-error" role="alert" className="mt-3 text-sm text-paper">
-          {message}
+          {error}
         </p>
       )}
     </section>
