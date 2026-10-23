@@ -214,6 +214,11 @@ The stack's three state/validation libraries each have one job:
 
 ## Newsletter sign-up emails
 
+The sign-up form (`newsletter-form.tsx`) appears in two places:
+
+- the wine **"The list"** section on the page (`#notify`), and
+- a **popup** (`newsletter-popup.tsx`, shadcn Dialog) that opens **2 minutes** after the page loads (`POPUP_DELAY_MS`). It doesn't open if the visitor already signed up. Once closed, it stays closed until the page is refreshed: that state lives in the Zustand UI store (memory only, deliberately not persisted).
+
 Every sign-up on the website sends a branded notification email to the inbox in `CONTACT_TO_EMAIL`.
 
 **Flow:** form (`newsletter.tsx`) → `useSubscribe` mutation → `POST /api/subscribe` → Zod validation → rate-limit check → `sendNotification()` ([`src/lib/mailer.ts`](src/lib/mailer.ts), Nodemailer over SMTP) → toast on the page.
@@ -302,7 +307,6 @@ The site is a standard Next.js app and deploys as-is to [Vercel](https://vercel.
 3. Add the five SMTP variables from [Environment variables](#environment-variables), or sign-ups will fail with a `500`.
 
 Other Node hosts work with `npm run build && npm run start`.
-
 ## Roadmap / TODO
 
 - [x] Email every newsletter sign-up to the team inbox
