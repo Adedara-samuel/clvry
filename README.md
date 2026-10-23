@@ -20,6 +20,7 @@ Developed by [Sapok](https://sapoktech.vercel.app).
 - [Data layer](#data-layer)
 - [API routes](#api-routes)
 - [Parked sections](#parked-sections)
+- [Newsletter sign-up emails](#newsletter-sign-up-emails)
 - [UI components (shadcn/ui)](#ui-components-shadcnui)
 - [Next.js 16 notes](#nextjs-16-notes)
 - [Conventions](#conventions)
@@ -80,7 +81,7 @@ src/
     globals.css          Tailwind v4 theme: brand tokens, shadcn tokens, light/dark, animations
     icon.png             Favicon (gold cross on black)
     api/
-      subscribe/route.ts POST: email sign-up (Zod-validated)
+      subscribe/route.ts POST: email sign-up (Zod-validated, rate-limited, emails the team)
       products/route.ts  GET: placeholder catalog (parked Shop)
       tracks/route.ts    GET: placeholder tracklist (parked Circle Sessions)
   components/
@@ -99,7 +100,11 @@ src/
       story.tsx            (parked) "Carried from the hill" brand story
       circle-sessions.tsx  (parked) Spinning record + tracklist
     ui/                  shadcn/ui components (generated, safe to edit)
+  emails/
+    new-subscriber.ts    Branded HTML + text notification email
+    assets.ts            Generated gold logos (base64) embedded in emails
   lib/
+    mailer.ts            Nodemailer transport + env validation (server only)
     schemas.ts           Zod schemas + inferred types
     queries.ts           TanStack Query hooks (useProducts, useTracks, useSubscribe)
     query-keys.ts        Shared query keys
@@ -201,14 +206,44 @@ The stack's three state/validation libraries each have one job:
 
 | Route            | Method | Body                 | Response                                       |
 | ---------------- | ------ | -------------------- | ---------------------------------------------- |
-| `/api/subscribe` | POST   | `{ "email": string }` | `200 { ok: true }` or `400 { ok: false, error }` |
+| `/api/subscribe` | POST   | `{ "email": string }` | `200 { ok: true }`, or `400`/`429`/`500` `{ ok: false, error }`. Emails the sign-up to `CONTACT_TO_EMAIL` |
 | `/api/products`  | GET    | none                 | `Product[]` (placeholder, parked Shop)         |
 | `/api/tracks`    | GET    | none                 | `Track[]` (placeholder, parked Circle Sessions)|
 
-> ⚠️ `/api/subscribe` validates but **does not store emails yet**. Connect a mailing-list
-> provider (Mailchimp, Resend, ConvertKit, etc.) at the `TODO` in
-> [`src/app/api/subscribe/route.ts`](src/app/api/subscribe/route.ts) before launch, and keep any API keys in
-> environment variables (`.env.local`, never committed).
+`/api/subscribe` also returns `429` after 5 attempts from one IP in 10 minutes, and `500` if the email can't be sent.
+
+## Newsletter sign-up emails
+
+Every sign-up on the website sends a branded notification email to the inbox in `CONTACT_TO_EMAIL`.
+
+**Flow:** form (`newsletter.tsx`) → `useSubscribe` mutation → `POST /api/subscribe` → Zod validation → rate-limit check → `sendNotification()` ([`src/lib/mailer.ts`](src/lib/mailer.ts), Nodemailer over SMTP) → toast on the page.
+
+**The email** ([`src/emails/new-subscriber.ts`](src/emails/new-subscriber.ts)):
+
+- Sender name **"CLVRY Website"**, subject `[CLVRY Website] New newsletter sign-up: <email>`, and a "From the website · Newsletter" badge, so it's always clear where it came from.
+- Black header with the gold CLVRY wordmark and a fire-red stripe, then a details card (email, time in UTC, source, page) and a "Write to subscriber" button. It closes with the winged cross, "Bring Christ to the street", and a "Developed by Sapok" footer.
+- `Reply-To` is set to the subscriber, so hitting reply writes to them directly.
+- Built with tables and inline styles (what Gmail, Outlook and Apple Mail reliably render), responsive below 620px, with a plain-text version included.
+- The logos are embedded as inline (CID) attachments from [`src/emails/assets.ts`](src/emails/assets.ts), so they show even before the site is deployed. That file is generated: gold-tinted, base64 copies of `public/brand/wordmark.png` and `mark.png`. If the logos change, regenerate it the same way (alpha channel of the PNG joined onto a solid `#daa520` image with `sharp`).
+- All user-supplied values are HTML-escaped before going into the template.
+
+### Environment variables
+
+Copy [`.env.example`](.env.example) to `.env.local` (git-ignored) and fill it in:
+
+| Variable           | Example              | Purpose                                                    |
+| ------------------ | -------------------- | ---------------------------------------------------------- |
+| `SMTP_HOST`        | `smtp.gmail.com`     | SMTP server                                                |
+| `SMTP_PORT`        | `465`                | `465` = TLS (used here); `587` = STARTTLS                  |
+| `SMTP_USER`        | `sender@gmail.com`   | Account that sends the notifications                       |
+| `SMTP_PASS`        | 16-char app password | For Gmail, an **App Password**, not the account password   |
+| `CONTACT_TO_EMAIL` | `inbox@example.com`  | Where every sign-up notification is delivered              |
+
+The variables are validated with Zod on the first send. If any are missing, the API returns `500` and the server log names the missing ones; the build itself doesn't need them. On Vercel, add the same five variables under **Project → Settings → Environment Variables**.
+
+> Sign-ups are delivered by email only and not stored in a database. To build a mailing list
+> you can send campaigns to, add a provider (Resend, Mailchimp, ConvertKit…) or a database
+> write next to `sendNotification()` in the route.
 
 ## Parked sections
 
@@ -264,13 +299,14 @@ The site is a standard Next.js app and deploys as-is to [Vercel](https://vercel.
 
 1. Push the repository to GitHub.
 2. Import it in Vercel (framework preset: Next.js, no extra settings).
-3. Add any mailing-list provider keys as environment variables once `/api/subscribe` is connected.
+3. Add the five SMTP variables from [Environment variables](#environment-variables), or sign-ups will fail with a `500`.
 
 Other Node hosts work with `npm run build && npm run start`.
 
 ## Roadmap / TODO
 
-- [ ] Connect `/api/subscribe` to a mailing-list provider
+- [x] Email every newsletter sign-up to the team inbox
+- [ ] Store subscribers in a mailing-list provider (for sending campaigns)
 - [ ] Real product photography and a commerce backend for the Shop
 - [ ] Audio hosting/streaming for Circle Sessions (the player UI exists; it has no audio source yet)
 - [ ] Lookbook content
