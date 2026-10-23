@@ -9,7 +9,10 @@ type UiState = {
   markSubscribed: () => void;
   popupOpen: boolean;
   popupDismissed: boolean;
+  /** Timed auto-open: skipped if already subscribed or dismissed this page load. */
   openPopup: () => void;
+  /** Explicit open (e.g. "Get early access" buttons): always opens. */
+  showPopup: () => void;
   dismissPopup: () => void;
   // Circle Sessions player — no audio source yet, so this only drives the UI.
   activeTrackId: string | null;
@@ -26,6 +29,7 @@ export const useUi = create<UiState>()((set) => ({
   popupDismissed: false,
   openPopup: () =>
     set((s) => (s.subscribed || s.popupDismissed ? {} : { popupOpen: true })),
+  showPopup: () => set({ popupOpen: true }),
   dismissPopup: () => set({ popupOpen: false, popupDismissed: true }),
   activeTrackId: null,
   playing: false,
