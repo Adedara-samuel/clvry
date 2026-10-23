@@ -4,6 +4,7 @@ import { Header } from "@/components/site/header";
 import { Hero } from "@/components/site/hero";
 import { Marquee } from "@/components/site/marquee";
 import { Newsletter } from "@/components/site/newsletter";
+import { NewsletterPopup } from "@/components/site/newsletter-popup";
 
 /*
  * Parked until launch: Shop, Story and Circle Sessions are built (components/site/*.tsx,
@@ -40,6 +41,7 @@ export default function Home() {
         <Newsletter />
       </main>
       <Footer />
+      <NewsletterPopup />
     </>
   );
 }

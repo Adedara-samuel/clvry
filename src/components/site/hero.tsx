@@ -22,7 +22,7 @@ export function Hero() {
       </h1>
 
       <p className="mt-6 font-display text-sm uppercase tracking-[0.4em] text-muted-foreground md:text-base">
-        Bring Christ to the street
+        Christ Above All
       </p>
 
       <div className="mt-12 flex flex-col gap-3 sm:flex-row">
