@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { CrossMark } from "@/components/brand/logo";
+import { Emblem } from "@/components/brand/emblem";
 import { INTRO_KEY } from "@/lib/intro";
 
 function finish() {
@@ -12,7 +12,8 @@ function finish() {
 }
 
 /**
- * Loading screen: the cross is raised from the hill, then the road runs out to the street.
+ * Loading screen: the CLVRY emblem rises in with the C turning on its axis inside the oval,
+ * over a slow wine glow, with a hairline filling underneath; then the screen lifts away.
  * Server-rendered and driven purely by CSS (see globals.css) so it covers the page before
  * hydration; JS only unlocks scrolling and remembers it for the session.
  */
@@ -32,30 +33,13 @@ export function Intro() {
         if (e.animationName === "intro-exit") finish();
       }}
     >
-      <CrossMark className="intro-mark w-[min(48vw,220px)] text-goldenrod" />
+      <div aria-hidden className="intro-glow absolute size-[min(90vw,520px)] rounded-full" />
 
-      <p className="mt-10 text-center font-display text-2xl uppercase leading-tight tracking-[0.15em] md:text-4xl">
-        {/* Inline delays: the unlayered .intro-line shorthand would override Tailwind utilities. */}
-        <span className="intro-line block" style={{ animationDelay: "0.9s" }}>
-          Bring Christ
-        </span>
-        <span className="intro-line block text-goldenrod" style={{ animationDelay: "1.3s" }}>
-          to the street
-        </span>
-      </p>
+      <Emblem className="intro-emblem relative w-[min(30vw,120px)] text-goldenrod" letterClassName="intro-spin" />
 
-      {/* The street */}
-      <div className="relative mt-10 h-px w-[min(70vw,320px)] bg-paper/15">
-        <div className="intro-road absolute inset-x-0 -top-px h-0.75" />
-        <div className="intro-progress absolute inset-0 -top-px h-0.75 bg-fire" />
+      <div className="relative mt-12 h-px w-[min(40vw,140px)] overflow-hidden bg-paper/10">
+        <div className="intro-progress absolute inset-0 bg-goldenrod" />
       </div>
-
-      <p
-        className="intro-line mt-5 font-mono text-[10px] uppercase tracking-[0.35em] text-paper/50"
-        style={{ animationDelay: "1.7s" }}
-      >
-        From the hill · to the block
-      </p>
     </div>
   );
 }

@@ -2,30 +2,25 @@ import { cn } from "@/lib/utils";
 
 /*
  * The CLVRY emblem (cross through the oval, serif C inside), redrawn as vectors from the
- * brand artwork so the C can be animated on its own layer. Both layers share one viewBox.
+ * brand artwork so the C can be animated on its own layer. All layers share one viewBox.
  */
 export const EMBLEM_VIEWBOX = "0 0 335 480";
 
-/** Oval ring + flared cross. The shaft stops where the C sits, as in the artwork. */
-export const RING_AND_CROSS = [
-  // Oval: thick on the sides, thin top and bottom
-  "M168.5 147a161.5 165 0 1 0 0.01 0Z M168.5 157a121 155 0 1 1 -0.01 0Z",
-  // Shaft, top segment with a flared cap
-  "M128 0H210L191 20V222H147V20Z",
-  // Shaft, bottom segment
-  "M147 403H191V466H147Z",
-  // Crossbar
-  "M60 70H278V103H60Z",
-  // Flared bar ends
-  "M43 55L62 72V101L43 118Z",
-  "M295 55L276 72V101L295 118Z",
+/** Oval ring: thick on the sides, thin top and bottom (fill-rule evenodd). */
+export const RING = "M168.5 147a161.5 165 0 1 0 0.01 0Z M168.5 157a121 155 0 1 1 -0.01 0Z";
+
+/** Flared cross. The shaft stops where the C sits, as in the artwork. */
+export const CROSS = [
+  "M128 0H210L191 20V222H147V20Z", // shaft, top segment with flared cap
+  "M147 403H191V466H147Z", // shaft, bottom segment
+  "M60 70H278V103H60Z", // crossbar
+  "M43 55L64 72V101L43 118Z", // flared left end
+  "M295 55L274 72V101L295 118Z", // flared right end
 ].join(" ");
 
-/** The serif C (heavy left stroke, light right, vertical serifs at both terminals). */
-export const LETTER_C = [
-  // Bowl: outer ellipse minus an off-centre inner ellipse, with the mouth cut by the clip below
-  "M156 219a91 93 0 1 0 0.01 0Z M166 226a62 86 0 1 1 -0.01 0Z",
-].join(" ");
+/** Serif C: heavy left stroke, hairline arms, vertical serifs at both terminals. */
+export const LETTER_C =
+  "M248 222V276H240C232 252 205 234 168 234C128 234 106 270 106 312C106 356 128 390 168 390C205 390 232 372 240 348H248V404C225 400 195 405 160 405C105 405 65 365 65 312C65 259 105 219 160 219C195 219 225 224 248 222Z";
 
 export function Emblem({
   className,
@@ -45,23 +40,16 @@ export function Emblem({
       className={cn("relative aspect-335/480", className)}
     >
       <svg viewBox={EMBLEM_VIEWBOX} className="absolute inset-0 size-full" fill="currentColor">
-        <path d={RING_AND_CROSS} fillRule="evenodd" />
+        <path d={RING} fillRule="evenodd" />
+        <path d={CROSS} />
       </svg>
+      {/* The C on its own layer, pivoting on its own centre */}
       <svg
         viewBox={EMBLEM_VIEWBOX}
-        className={cn("absolute inset-0 size-full [transform-origin:46.6%_65%]", letterClassName)}
+        className={cn("absolute inset-0 size-full origin-[46.6%_65%]", letterClassName)}
         fill="currentColor"
       >
-        <defs>
-          <clipPath id="clvry-c-mouth">
-            {/* Everything except the C's opening on the right */}
-            <path d="M0 0H335V480H0Z M206 270H262V354H206Z" clipRule="evenodd" fillRule="evenodd" />
-          </clipPath>
-        </defs>
-        <path d={LETTER_C} fillRule="evenodd" clipPath="url(#clvry-c-mouth)" />
-        {/* Terminal serifs */}
-        <path d="M204 262L246 248V284L204 276Z" />
-        <path d="M204 348L246 340V376L204 362Z" />
+        <path d={LETTER_C} />
       </svg>
     </div>
   );
