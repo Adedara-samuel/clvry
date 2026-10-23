@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Cinzel, Geist, Geist_Mono } from "next/font/google";
 import { Intro } from "@/components/site/intro";
-import { introInitScript } from "@/lib/intro";
 import { Toaster } from "@/components/ui/sonner";
 import { themeInitScript } from "@/store/theme";
 import { Providers } from "./providers";
@@ -38,8 +37,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} h-full antialiased`}
     >
       <head>
-        {/* Static, first-party strings — no user input reaches these. */}
-        <script dangerouslySetInnerHTML={{ __html: `${themeInitScript};${introInitScript}` }} />
+        {/* Static, first-party string — no user input reaches it. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <Intro />

@@ -2,7 +2,7 @@
 
 **Bring Christ to the street.**
 
-CLVRY is a faith-led streetwear brand that also hosts _Circle Sessions_: Godly music recorded in the round. This repository holds the brand's landing page. Right now the site is a **coming-soon page**: the hero, the brand story banner, a "coming soon" overview of every feature, and an email sign-up. The Shop, Story and Circle Sessions sections are built but parked until launch (see [Parked sections](#parked-sections)).
+CLVRY is a faith-led streetwear brand that will also release Godly music with a street sound. This repository holds the brand's landing page. Right now the live page is deliberately minimal: a scripture ticker, the hero with a glass-prism **Get early access** button and the social handles, and an early-access popup. Other sections (header, marquee, coming-soon cards, sign-up band, footer) are built but commented out in [`src/app/page.tsx`](src/app/page.tsx), and the Shop, Story and music player are parked until launch (see [Parked sections](#parked-sections)).
 
 Developed by [Sapok](https://sapoktech.vercel.app).
 

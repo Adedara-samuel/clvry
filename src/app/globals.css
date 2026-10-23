@@ -317,7 +317,7 @@ body::after {
 
 /* ---------- Intro: emblem with the spinning C ---------- */
 
-/* Seen this session (flag set by the init script) → never paint it. */
+/* Finished (Intro sets data-intro="seen") → remove it and unlock scrolling. */
 html[data-intro="seen"] .intro {
   display: none;
 }
@@ -334,13 +334,13 @@ html:not([data-intro="seen"]) body {
   transform: translateY(14px) scale(0.94);
   animation: intro-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s forwards;
 }
-/* The C turns on its vertical axis, pauses, turns again */
+/* The C turns steadily on its vertical axis, one full turn every 1.4s */
 .intro-spin {
-  animation: intro-spin 1.5s cubic-bezier(0.65, 0, 0.35, 1) 0.6s infinite;
+  animation: intro-spin 1.4s linear infinite;
 }
-/* Slow wine glow breathing behind the emblem */
+/* Soft gold glow breathing behind the emblem */
 .intro-glow {
-  background: radial-gradient(circle, color-mix(in srgb, var(--wine) 55%, transparent) 0%, transparent 65%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--antique) 18%, transparent) 0%, transparent 65%);
   animation: intro-breathe 2.4s ease-in-out infinite;
 }
 .intro-progress {
@@ -362,11 +362,10 @@ html:not([data-intro="seen"]) body {
   }
 }
 @keyframes intro-spin {
-  0% {
+  from {
     transform: perspective(500px) rotateY(0deg);
   }
-  75%,
-  100% {
+  to {
     transform: perspective(500px) rotateY(360deg);
   }
 }
