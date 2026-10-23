@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+/* `dark:` follows the resolved theme the init script writes to <html data-theme>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * `ink` is the page background and `bone` the page text; they swap per theme.
+ * `night` and `paper` never change — use them on fixed-color surfaces (wine, fire, gold).
+ */
+:root {
+  --night: #0b0a0a;
+  --paper: #f4efe6;
+  --wine: #5e0b1a;
+  --fire: #b22222;
+  --gold: #daa520;
+  --goldenrod: #daa520; /* fixed; for gold on wine/fire surfaces */
+
+  color-scheme: dark;
+  --ink: var(--night);
+  --ink-soft: #151313;
+  --bone: var(--paper);
+  --card: #1c1a19;
+  --glow: 0.8;
+  --grain: 0.06;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ink: var(--paper);
+  --ink-soft: #e6dfd3;
+  --bone: var(--night);
+  --card: #ddd5c8;
+  --glow: 0.25;
+  --grain: 0.04;
+  --gold: #a87a0c; /* deeper goldenrod so gold text stays legible on paper */
+}
+
+/* No-JS fallback: follow the OS until the init script sets data-theme. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --ink: var(--paper);
+    --ink-soft: #e6dfd3;
+    --bone: var(--night);
+    --card: #ddd5c8;
+    --glow: 0.25;
+    --grain: 0.04;
+    --gold: #a87a0c;
+  }
+}
+
+@theme inline {
+  --color-night: var(--night);
+  --color-paper: var(--paper);
+  --color-goldenrod: var(--goldenrod);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-bone: var(--bone);
+  --color-wine: var(--wine);
+  --color-fire: var(--fire);
+  --color-gold: var(--gold);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-cinzel);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--bone);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* Film grain over everything — keeps the flat blacks from feeling digital. */
+body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Brand marks are alpha masks so they can take any brand color via currentColor. */
+.brand-mask {
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-spin-slow {
+    animation: none;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node -v)",
+      "PowerShell(npm -v)",
+      "PowerShell($s=\"C:\\\\Users\\\\HomePC\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-HomePC-Documents-work-clvry\\\\f7d03af8-4a7f-4d97-878a-21dee442ec0d\\\\scratchpad\\\\clvry\"; robocopy $s . /E /XD .git node_modules .next /NFL /NDL /NJH /NJS | Out-Null; New-Item -ItemType Directory -Force public\\\\brand | Out-Null; $i=\"C:\\\\Users\\\\HomePC\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-HomePC-Documents-work-clvry\\\\f7d03af8-4a7f-4d97-878a-21dee442ec0d\\\\images\"; Copy-Item \"$i\\\\1.jpg\" public\\\\brand\\\\mark-source.jpg; Copy-Item \"$i\\\\2.jpg\" public\\\\brand\\\\heart-source.jpg; Copy-Item \"$i\\\\3.jpg\" public\\\\brand\\\\wordmark-reference.jpg; Get-ChildItem -Force; Get-Content package.json)",
+      "PowerShell(npm install)",
+      "PowerShell(npm install @tanstack/react-query @tanstack/react-query-devtools zustand zod clsx tailwind-merge)"
+    ]
+  }
+}
