@@ -1,7 +1,6 @@
 "use client";
 
 import { MenuIcon } from "lucide-react";
-import Link from "next/link";
 import { HeartLogo } from "@/components/brand/logo";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -60,11 +59,7 @@ export function Header() {
           </SheetContent>
         </Sheet>
 
-        <Link href="/" aria-label="CLVRY home" className="justify-self-center">
-          <HeartLogo className="w-20 text-foreground transition hover:text-gold md:w-24" label="CLVRY" />
-        </Link>
-
-        <div className="flex items-center gap-2 justify-self-end">
+        <div className="col-start-3 flex items-center gap-2 justify-self-end">
           <ThemeToggle />
           <a
             href="#notify"
