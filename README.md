@@ -17,6 +17,8 @@ Developed by [Sapok](https://sapoktech.vercel.app).
 - [Brand system](#brand-system)
 - [Theming (light / dark)](#theming-light--dark)
 - [Intro loading screen](#intro-loading-screen)
+- [Scripture ticker](#scripture-ticker)
+- [Early access and socials](#early-access-and-socials)
 - [Data layer](#data-layer)
 - [API routes](#api-routes)
 - [Parked sections](#parked-sections)
@@ -55,8 +57,7 @@ npm run dev
 
 Open http://localhost:3000.
 
-> The intro screen plays once per browser session. To see it again, open a new tab/window
-> or clear `sessionStorage` key `clvry-intro` in DevTools.
+> The loading screen plays on every page load (~3s). The early-access popup opens 2 seconds after it finishes.
 
 ## Scripts
 
@@ -87,12 +88,16 @@ src/
   components/
     brand/logo.tsx       <CrossMark />, <HeartLogo />, <Wordmark />
     site/                Page sections
-      intro.tsx            Loading screen: "Bring Christ to the street"
+      intro.tsx            Loading screen: emblem with the spinning C, on cream
+      scripture-ticker.tsx Top bar: scrolling Luke 23:32, Gal 6:14, Heb 12:2 (NKJV) on wine
       header.tsx           Sticky header, mobile Sheet menu, theme toggle
-      hero.tsx             Hero: cross turns to follow the pointer, gold light tracks it, idle float
+      hero.tsx             Hero: cross follows the pointer, early-access button, socials
       pointer-stage.tsx    Writes eased pointer position to --mx/--my for the hero effects
-      newsletter-form.tsx  Shared sign-up form (section + popup)
-      newsletter-popup.tsx Sign-up popup, opens 2 min after load
+      early-access-button.tsx  Glass-prism "Get early access" button → opens the popup
+      socials.tsx          Instagram / X links (@clvrywrld), from lib/socials.ts
+      social-icon.tsx      Inline Instagram / X glyphs
+      newsletter-form.tsx  Shared sign-up form (`wine` band style / `plain` popup style)
+      newsletter-popup.tsx Minimal early-access popup, opens 2s after the loading screen
       marquee.tsx          Scrolling wine/gold ticker
       coming-soon.tsx      "Everything else is on the way" feature cards
       newsletter.tsx       Email sign-up (Zod + TanStack mutation + toast)
@@ -113,7 +118,7 @@ src/
     query-keys.ts        Shared query keys
     prefetch.ts          Server-side prefetch for parked sections ("use cache")
     catalog.ts           Placeholder products & tracks
-    intro.ts             Intro session key + <head> snippet
+    socials.ts           Social handles and URLs (single source of truth)
     utils.ts             cn() helper (clsx + tailwind-merge)
   store/
     theme.ts             Zustand theme store (persisted) + theme <head> snippet
@@ -125,16 +130,17 @@ src/
 
 ### Colors
 
-Defined as CSS variables in [`src/app/globals.css`](src/app/globals.css) and exposed as Tailwind colors.
+From the **CLVRY Brand Bible**: Primary Wine `#780008` (garments/graphics), Deep Antique Gold `#8C6A24` (logos, typography, embroidery), Black `#0A0A0A`, Cream `#F2EBDD`. Defined as CSS variables in [`src/app/globals.css`](src/app/globals.css) and exposed as Tailwind colors.
 
 | Token       | Tailwind class        | Value      | Notes                                              |
 | ----------- | --------------------- | ---------- | -------------------------------------------------- |
-| `night`     | `bg-night` / `text-night`   | `#0b0a0a` | Fixed black                                   |
-| `paper`     | `bg-paper` / `text-paper`   | `#f4efe6` | Fixed off-white (from the wordmark artwork)   |
-| `wine`      | `bg-wine`             | `#5e0b1a`  | Brand wine                                         |
-| `fire`      | `bg-fire`             | `#b22222`  | Brand firebrick red                                |
-| `goldenrod` | `text-goldenrod`      | `#daa520`  | Fixed gold, for use **on wine/fire surfaces**      |
-| `gold`      | `text-gold`           | theme-aware | `#daa520` in dark, deeper `#a87a0c` in light for legibility on paper |
+| `night`     | `bg-night` / `text-night`   | `#0A0A0A` | Brand Black                                   |
+| `paper`     | `bg-paper` / `text-paper`   | `#F2EBDD` | Brand Cream                                   |
+| `wine`      | `bg-wine`             | `#780008`  | Brand Primary Wine (ticker, sign-up band, scrollbar) |
+| `antique`   | `text-antique`        | `#8C6A24`  | Brand Deep Antique Gold, exact (logos, gold on cream) |
+| `goldenrod` | `text-goldenrod`      | `#C9A45C`  | Antique gold lifted for legibility as **text on black or wine** |
+| `gold`      | `text-gold`           | theme-aware | `goldenrod` in dark, exact `antique` in light       |
+| `fire`      | `bg-fire`             | `#B22222`  | Small accents only (not in the brand bible)         |
 | `ink`       | `bg-ink`              | theme-aware | Page background (night ↔ paper)                   |
 | `bone`      | `text-bone`           | theme-aware | Page text (paper ↔ night)                         |
 
@@ -156,6 +162,9 @@ The corner radius is `0` on purpose (`--radius: 0rem`). Sharp edges suit streetw
 | `<CrossMark />`  | `public/brand/mark.png`    | Winged crucifix on the hill               |
 | `<HeartLogo />`  | `public/brand/heart.png`   | CLVRY lettering in the heart (header)     |
 | `<Wordmark />`   | `public/brand/wordmark.png`| CLVRY serif wordmark (hero, footer)       |
+| `<Emblem />` (`brand/emblem.tsx`) | `public/brand/emblem-ring.png` + `emblem-c.png` | Cross through the oval with the C inside (loading screen) |
+
+The emblem is cut from `public/brand/clvry-c-logo.jpeg` into two masks on the same 329×482 canvas: the oval and cross, and the C on its own (isolated as the connected shape inside the oval) so it can spin. Its pivot, `origin-[45.9%_65.8%]`, is the C's measured centre. If the logo file changes, regenerate both PNGs the same way and re-measure the pivot.
 
 The PNGs are the original black-on-white JPGs (kept in `assets/brand/`) converted so that darkness becomes alpha. The components use them as **CSS masks** filled with `currentColor`, so you set a logo's color with a text class:
 
@@ -181,21 +190,32 @@ To change a color in one theme only, edit the `:root` block (dark default) or th
 
 ## Intro loading screen
 
-[`src/components/site/intro.tsx`](src/components/site/intro.tsx) shows the "Bring Christ to the street" sequence:
+[`src/components/site/intro.tsx`](src/components/site/intro.tsx) plays on **every page load**, always in light colors:
 
-1. The winged cross is raised from the hill (clip-path reveal).
-2. "Bring Christ" / "to the street" rise in.
-3. A road line with moving center dashes fills in fire red ("from the hill · to the block").
-4. The screen slides up and away (~3s total).
+1. On cream, the CLVRY emblem (Deep Antique Gold) settles in over a soft breathing gold glow.
+2. The C spins steadily on its vertical axis inside the oval: one full turn every 1.4s, linear, no pauses.
+3. A hairline fills underneath, then the screen slides up and away (~3s total).
 
 How it works:
 
 - The animation is **pure CSS** (`.intro*` rules in `globals.css`) and the overlay is server-rendered, so it covers the page before React hydrates.
-- Page scroll is locked while it plays. When the exit animation ends, JS sets `data-intro="seen"` on `<html>` (unlocking scroll) and stores `clvry-intro` in `sessionStorage`. A 4.5s timeout does the same as a safety net.
-- On later loads in the same session, the `<head>` snippet (`introInitScript` in [`src/lib/intro.ts`](src/lib/intro.ts)) sets `data-intro="seen"` immediately, so the intro never paints.
-- `prefers-reduced-motion` users get a short static version.
+- Page scroll is locked while it plays. When the exit animation ends, JS sets `data-intro="seen"` on `<html>`, which hides the overlay, unlocks scrolling, and starts the popup timer. A 4.5s timeout does the same as a safety net.
+- `prefers-reduced-motion` users get a short static version (no spin).
 
-To change timing, edit the `animation` delays in the `.intro*` CSS and the inline `animationDelay` values in `intro.tsx`. Keep the safety-net timeout longer than the whole sequence.
+To change the spin speed, edit `.intro-spin` in `globals.css`. To change the overall length, edit the `intro-exit` delay and keep the safety-net timeout in `intro.tsx` longer than the whole sequence.
+
+### Scrollbar
+
+Styled to the brand in `globals.css`: a thin wine thumb on the page background, turning antique gold on hover (`scrollbar-color` for Firefox, `::-webkit-scrollbar` for Chrome, Edge and Safari).
+
+## Scripture ticker
+
+[`scripture-ticker.tsx`](src/components/site/scripture-ticker.tsx) is the wine bar at the top of the page. It scrolls Luke 23:32, Galatians 6:14 and Hebrews 12:2 (NKJV) continuously and pauses on hover. Screen readers get the verses once as a list, and the moving copy is hidden from them. To change the verses, edit the `verses` array. Keep the NKJV copyright notice in the file comment when quoting NKJV.
+
+## Early access and socials
+
+- **Get early access** ([`early-access-button.tsx`](src/components/site/early-access-button.tsx)) is the hero's main button. It has the glass-prism look (`.btn-prism` in `globals.css`): a frosted translucent body, a slowly rotating iridescent edge, and a light sheen that sweeps across on hover. Clicking it opens the early-access popup.
+- **Social handles** live in [`src/lib/socials.ts`](src/lib/socials.ts) (Instagram and X, both `@clvrywrld`) and render via `<Socials />` in the hero and the popup. Add or change a network there.
 
 ## Data layer
 
@@ -219,8 +239,8 @@ The stack's three state/validation libraries each have one job:
 
 The sign-up form (`newsletter-form.tsx`) appears in two places:
 
-- the wine **"The list"** section on the page (`#notify`), and
-- a **popup** (`newsletter-popup.tsx`, shadcn Dialog) that opens **2 minutes** after the page loads (`POPUP_DELAY_MS`). It doesn't open if the visitor already signed up. Once closed, it stays closed until the page is refreshed: that state lives in the Zustand UI store (memory only, deliberately not persisted).
+- the wine **"The list"** section on the page (`#notify`, currently commented out), and
+- a minimal **"Get early access" popup** (`newsletter-popup.tsx`, shadcn Dialog, theme-aware, with one underlined email field). It opens automatically **2 seconds after the loading screen finishes** (`POPUP_DELAY_MS`), unless the visitor already signed up or closed it during this page load (that state lives in the Zustand UI store, in memory only, so a refresh resets it). It also opens any time someone clicks **Get early access**.
 
 Every sign-up on the website sends a branded notification email to the inbox in `CONTACT_TO_EMAIL`.
 
@@ -229,10 +249,10 @@ Every sign-up on the website sends a branded notification email to the inbox in 
 **The email** ([`src/emails/new-subscriber.ts`](src/emails/new-subscriber.ts)):
 
 - Sender name **"CLVRY Website"**, subject `[CLVRY Website] New newsletter sign-up: <email>`, and a "From the website · Newsletter" badge, so it's always clear where it came from.
-- Black header with the gold CLVRY wordmark and a fire-red stripe, then a details card (email, time in UTC, source, page) and a "Write to subscriber" button. It closes with the winged cross, "Bring Christ to the street", and a "Developed by Sapok" footer.
+- Brand-bible colors: a black header with the antique-gold CLVRY wordmark and a wine stripe, then a details card (email, time in UTC, source, page) and a "Write to subscriber" button. It closes with the winged cross, "Bring Christ to the street", and a "Developed by Sapok" footer.
 - `Reply-To` is set to the subscriber, so hitting reply writes to them directly.
 - Built with tables and inline styles (what Gmail, Outlook and Apple Mail reliably render), responsive below 620px, with a plain-text version included.
-- The logos are embedded as inline (CID) attachments from [`src/emails/assets.ts`](src/emails/assets.ts), so they show even before the site is deployed. That file is generated: gold-tinted, base64 copies of `public/brand/wordmark.png` and `mark.png`. If the logos change, regenerate it the same way (alpha channel of the PNG joined onto a solid `#daa520` image with `sharp`).
+- The logos are embedded as inline (CID) attachments from [`src/emails/assets.ts`](src/emails/assets.ts), so they show even before the site is deployed. That file is generated: gold-tinted, base64 copies of `public/brand/wordmark.png` and `mark.png`. If the logos change, regenerate it the same way (alpha channel of the PNG joined onto a solid `#8C6A24` image with `sharp`).
 - All user-supplied values are HTML-escaped before going into the template.
 
 ### Environment variables
