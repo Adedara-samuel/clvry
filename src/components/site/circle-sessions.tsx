@@ -1,7 +1,7 @@
 "use client";
 
 import { HeartLogo } from "@/components/brand/logo";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 import { useTracks } from "@/lib/queries";
 import { useUi } from "@/store/ui";
 

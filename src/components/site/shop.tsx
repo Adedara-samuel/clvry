@@ -1,7 +1,7 @@
 "use client";
 
 import { CrossMark } from "@/components/brand/logo";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 import { useProducts } from "@/lib/queries";
 import type { Product } from "@/lib/schemas";
 import { useBag } from "@/store/bag";

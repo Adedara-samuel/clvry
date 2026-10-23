@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { HeartLogo } from "@/components/brand/logo";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 import { useBag } from "@/store/bag";
 import { useUi } from "@/store/ui";
 import { ThemeToggle } from "./theme-toggle";
