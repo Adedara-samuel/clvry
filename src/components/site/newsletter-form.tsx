@@ -68,13 +68,13 @@ export function NewsletterForm({
 
   if (subscribed) {
     return (
-      <p className={cn("font-mono text-xs uppercase tracking-[0.25em]", s.done)}>You&apos;re in. Grace and peace.</p>
+      <p className={cn("font-mono text-xs uppercase tracking-[0.25em]", look.done)}>You&apos;re in. Grace and peace.</p>
     );
   }
 
   return (
     <>
-      <form onSubmit={onSubmit} noValidate className={cn("flex w-full flex-col", s.form)}>
+      <form onSubmit={onSubmit} noValidate className={cn("flex w-full flex-col", look.form)}>
         <Label htmlFor={id} className="sr-only">
           Email address
         </Label>
@@ -87,18 +87,18 @@ export function NewsletterForm({
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `${id}-error` : undefined}
-          className={s.input}
+          className={look.input}
         />
         <Button
           type="submit"
           disabled={subscribe.isPending}
-          className={cn("font-mono text-[11px] uppercase tracking-[0.25em]", s.button)}
+          className={cn("font-mono text-[11px] uppercase tracking-[0.25em]", look.button)}
         >
           {subscribe.isPending ? "Joining…" : "Join"}
         </Button>
       </form>
       {error && (
-        <p id={`${id}-error`} role="alert" className={cn("mt-3 text-sm", s.error)}>
+        <p id={`${id}-error`} role="alert" className={cn("mt-3 text-sm", look.error)}>
           {error}
         </p>
       )}

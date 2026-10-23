@@ -5,6 +5,7 @@ import { Hero } from "@/components/site/hero";
 import { Marquee } from "@/components/site/marquee";
 import { Newsletter } from "@/components/site/newsletter";
 import { NewsletterPopup } from "@/components/site/newsletter-popup";
+import { ScriptureTicker } from "@/components/site/scripture-ticker";
 
 /*
  * Parked until launch: Shop, Story and Circle Sessions are built (components/site/*.tsx,
@@ -30,9 +31,7 @@ import { NewsletterPopup } from "@/components/site/newsletter-popup";
 export default function Home() {
   return (
     <>
-      <div className="bg-fire py-2 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-paper">
-        Drop 001 &amp; Circle Sessions — coming soon
-      </div>
+      <ScriptureTicker />
       {/* <Header /> */}
       <main>
         <Hero />

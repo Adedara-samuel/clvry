@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useUi } from "@/store/ui";
 import { NewsletterForm } from "./newsletter-form";
+import { Socials } from "./socials";
 
 const POPUP_DELAY_MS = 2000;
 
@@ -54,6 +55,7 @@ export function NewsletterPopup() {
           The shop, the music and the album are coming soon. Be the first to know.
         </DialogDescription>
         <NewsletterForm variant="plain" onSubscribed={() => setTimeout(dismissPopup, 1800)} />
+        <Socials className="mt-8 justify-start" />
       </DialogContent>
     </Dialog>
   );

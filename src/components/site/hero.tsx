@@ -1,9 +1,7 @@
 import { CrossMark, Wordmark } from "@/components/brand/logo";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { EarlyAccessButton } from "./early-access-button";
 import { PointerStage } from "./pointer-stage";
-
-const cta = "h-12 px-8 font-mono text-[11px] uppercase tracking-[0.25em]";
+import { Socials } from "./socials";
 
 export function Hero() {
   return (
@@ -51,13 +49,10 @@ export function Hero() {
       </p>
 
       <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-        {/* <a href="#notify" className={cn(buttonVariants(), cta)}>
-          Early access
-        </a> */}
-        <a href="#shop" className={cn(buttonVariants({ variant: "outline" }), cta, "bg-transparent")}>
-          Shop Now
-        </a>
+        <EarlyAccessButton className="h-12 px-9" />
       </div>
+
+      <Socials className="mt-10" />
     </PointerStage>
   );
 }

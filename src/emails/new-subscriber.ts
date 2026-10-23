@@ -2,12 +2,14 @@ import { emailMark, emailWordmark } from "./assets";
 
 // Email HTML: tables + inline styles only — that's what Gmail, Outlook and Apple Mail all render.
 const c = {
-  night: "#0b0a0a",
-  paper: "#f4efe6",
-  card: "#fbf8f3",
-  wine: "#5e0b1a",
-  fire: "#b22222",
-  gold: "#daa520",
+  // CLVRY Brand Bible palette
+  night: "#0a0a0a",
+  paper: "#f2ebdd",
+  card: "#faf6ee",
+  wine: "#780008",
+  fire: "#780008",
+  gold: "#8c6a24", // Deep Antique Gold: borders, logos
+  goldLight: "#c9a45c", // antique gold lifted for text on black
   muted: "#6b6460",
   line: "#e6dfd3",
 };
@@ -92,7 +94,7 @@ export function newSubscriberEmail({ email, submittedAt, pageUrl }: NewSubscribe
           <tr>
             <td align="center" style="background:${c.night};padding:44px 40px 36px;">
               <img src="cid:${CID_WORDMARK}" width="200" height="${Math.round((200 / emailWordmark.width) * emailWordmark.height)}" alt="CLVRY" style="display:block;border:0;outline:none;width:200px;height:auto;">
-              <p style="margin:20px 0 0;font-family:${mono};font-size:10px;letter-spacing:4px;text-transform:uppercase;color:${c.gold};">Website notification</p>
+              <p style="margin:20px 0 0;font-family:${mono};font-size:10px;letter-spacing:4px;text-transform:uppercase;color:${c.goldLight};">Website notification</p>
             </td>
           </tr>
           <tr><td style="background:${c.fire};height:4px;line-height:4px;font-size:0;">&nbsp;</td></tr>
@@ -103,7 +105,7 @@ export function newSubscriberEmail({ email, submittedAt, pageUrl }: NewSubscribe
               <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="background:${c.wine};padding:7px 14px;font-family:${mono};font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${c.paper};">
-                    <span style="color:${c.gold};">&#9679;</span>&nbsp; From the website &middot; Newsletter
+                    <span style="color:${c.goldLight};">&#9679;</span>&nbsp; From the website &middot; Newsletter
                   </td>
                 </tr>
               </table>
@@ -113,7 +115,7 @@ export function newSubscriberEmail({ email, submittedAt, pageUrl }: NewSubscribe
               </h1>
               <p style="margin:16px 0 0;font-family:${sans};font-size:15px;line-height:24px;color:${c.muted};">
                 Someone just joined the CLVRY newsletter through the sign-up form on the website.
-                They&rsquo;ll want to hear first when the shop, Circle Sessions and the lookbook open.
+                They&rsquo;ll want to hear first when the shop, the music and the album drop.
               </p>
             </td>
           </tr>
@@ -174,7 +176,7 @@ export function newSubscriberEmail({ email, submittedAt, pageUrl }: NewSubscribe
               </p>
               <p style="margin:10px 0 0;font-family:${mono};font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6b6460;">
                 &copy; CLVRY &middot; Developed by
-                <a href="https://sapoktech.vercel.app" style="color:${c.gold};text-decoration:none;">Sapok</a>
+                <a href="https://sapoktech.vercel.app" style="color:${c.goldLight};text-decoration:none;">Sapok</a>
               </p>
             </td>
           </tr>

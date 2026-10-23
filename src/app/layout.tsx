@@ -26,7 +26,7 @@ const cinzel = Cinzel({
 export const metadata: Metadata = {
   title: "CLVRY — Wear the Word",
   description:
-    "CLVRY is streetwear carried from the cross. Clothing, and Circle Sessions — music made for worship.",
+    "CLVRY is streetwear carried from the cross: clothing, and Godly music with a street sound. Coming soon.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
