@@ -40,6 +40,17 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-2 pt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground sm:flex-row">
           <span>© CLVRY. All glory to God.</span>
           <span>Galatians 6:14</span>
+          <span>
+            Developed by{" "}
+            <a
+              href="https://sapoktech.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold underline-offset-4 transition hover:underline"
+            >
+              Sapok
+            </a>
+          </span>
         </div>
       </div>
     </footer>
