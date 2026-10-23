@@ -33,14 +33,14 @@ export default function Home() {
       <div className="bg-fire py-2 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-paper">
         Drop 001 &amp; Circle Sessions — coming soon
       </div>
-      <Header />
+      {/* <Header /> */}
       <main>
         <Hero />
-        <Marquee />
-        <ComingSoon />
-        <Newsletter />
+        {/* <Marquee /> */}
+        {/* <ComingSoon /> */}
+        {/* <Newsletter /> */}
       </main>
-      <Footer />
+      {/* <Footer /> */}
       <NewsletterPopup />
     </>
   );

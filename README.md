@@ -89,7 +89,10 @@ src/
     site/                Page sections
       intro.tsx            Loading screen: "Bring Christ to the street"
       header.tsx           Sticky header, mobile Sheet menu, theme toggle
-      hero.tsx             Hero with mark + wordmark
+      hero.tsx             Hero: cross turns to follow the pointer, gold light tracks it, idle float
+      pointer-stage.tsx    Writes eased pointer position to --mx/--my for the hero effects
+      newsletter-form.tsx  Shared sign-up form (section + popup)
+      newsletter-popup.tsx Sign-up popup, opens 2 min after load
       marquee.tsx          Scrolling wine/gold ticker
       coming-soon.tsx      "Everything else is on the way" feature cards
       newsletter.tsx       Email sign-up (Zod + TanStack mutation + toast)

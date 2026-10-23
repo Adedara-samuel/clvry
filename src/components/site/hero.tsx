@@ -23,7 +23,7 @@ export function Hero() {
         }}
       />
 
-      <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-gold">Coming soon</p>
+      {/* <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-gold">Coming soon</p> */}
 
       {/* The cross turns to face the visitor, and floats when they're still */}
       <div className="hero-float mt-10 w-[min(70vw,420px)]">
@@ -51,11 +51,11 @@ export function Hero() {
       </p>
 
       <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-        <a href="#notify" className={cn(buttonVariants(), cta)}>
-          Get notified
-        </a>
-        <a href="#coming-soon" className={cn(buttonVariants({ variant: "outline" }), cta, "bg-transparent")}>
-          See what&apos;s coming
+        {/* <a href="#notify" className={cn(buttonVariants(), cta)}>
+          Early access
+        </a> */}
+        <a href="#shop" className={cn(buttonVariants({ variant: "outline" }), cta, "bg-transparent")}>
+          Shop Now
         </a>
       </div>
     </PointerStage>

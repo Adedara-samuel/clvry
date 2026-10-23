@@ -6,17 +6,21 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Brand palette
+ * Brand palette (CLVRY Brand Bible): Primary Wine #780008, Deep Antique Gold #8C6A24,
+ * Black #0A0A0A, Cream #F2EBDD.
  * `ink` is the page background and `bone` the page text; they swap per theme.
  * `night`, `paper` and `goldenrod` never change — use them on fixed-color surfaces (wine, fire).
+ * `goldenrod` is the antique gold lifted for legibility as text on black/wine; `antique` is the
+ * exact brand gold (logos, borders, text on cream).
  * shadcn's semantic tokens (background, primary, …) are mapped onto the same palette below.
  */
 :root {
-  --night: #0b0a0a;
-  --paper: #f4efe6;
-  --wine: #5e0b1a;
+  --night: #0a0a0a;
+  --paper: #f2ebdd;
+  --wine: #780008;
   --fire: #b22222;
-  --goldenrod: #daa520;
+  --antique: #8c6a24;
+  --goldenrod: #c9a45c;
   --radius: 0rem; /* sharp corners — street, not SaaS */
 
   /* dark (default) */

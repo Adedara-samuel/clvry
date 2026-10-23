@@ -13,7 +13,7 @@ import { ThemeToggle } from "./theme-toggle";
 const links = [
   { href: "#coming-soon", label: "Shop" },
   { href: "#coming-soon", label: "Circle Sessions" },
-  { href: "#coming-soon", label: "Lookbook" },
+  { href: "#coming-soon", label: "Albulm" },
 ];
 
 export function Header() {

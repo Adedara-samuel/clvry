@@ -35,7 +35,7 @@ export function NewsletterPopup() {
             First in the circle.
           </DialogTitle>
           <DialogDescription className="mt-4 max-w-sm text-sm text-paper/70">
-            The shop, Circle Sessions and the lookbook are coming soon. Leave your email and we&apos;ll tell you
+            The shop, Circle Sessions and the Album are coming soon. Leave your email and we&apos;ll tell you
             the moment they open.
           </DialogDescription>
           <NewsletterForm onSubscribed={() => setTimeout(dismissPopup, 1800)} />
