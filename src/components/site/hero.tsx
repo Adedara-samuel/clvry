@@ -4,24 +4,18 @@ import { HeroStage } from "./hero-stage";
 import { Socials } from "./socials";
 import { ThemeToggle } from "./theme-toggle";
 
-const POSTER = "/images/clvry-hero-poster.jpg";
-const TAGLINE = "Christ Above All";
-
 export function Hero() {
   return (
     <HeroStage
       // The scripture ticker above is ~2rem, so the hero plus ticker fill exactly one screen.
-      className="hero relative isolate flex min-h-[calc(100svh-2rem)] flex-col items-center justify-center overflow-hidden bg-(--hero-base) px-6 py-24 text-center"
+      className="hero relative isolate flex min-h-[calc(100svh-2rem)] flex-col items-center justify-center overflow-hidden bg-black px-6 py-20 text-center"
     >
-      {/* 1. Video (the poster doubles as the reduced-motion still) */}
-      <div
-        aria-hidden
-        className="hero-media absolute inset-0 -z-30 bg-cover bg-center"
-        style={{ backgroundImage: `url(${POSTER})` }}
-      >
+      {/* Video. It fades up from black and back down to black, so the loop seam is invisible.
+          No poster attribute: a still of the finished shot would flash, then cut to black. The
+          poster sits underneath as the reduced-motion / failure still. */}
+      <div aria-hidden className="hero-still absolute inset-0 -z-20">
         <video
           className="hero-video size-full object-cover"
-          poster={POSTER}
           muted
           loop
           playsInline
@@ -35,45 +29,28 @@ export function Hero() {
         </video>
       </div>
 
-      {/* 2. Wash: cream (light) / near-black (dark) with the glow behind the mark */}
-      <div aria-hidden className="hero-wash absolute inset-0 -z-20" />
-      <div aria-hidden className="hero-veil absolute inset-0 -z-10" />
+      {/* A soft pool of light (cream) or shade (dark) behind the mark; the edges stay clear video. */}
+      <div aria-hidden className="hero-pool absolute inset-0 -z-10" />
 
-      <ThemeToggle className="hero-in absolute top-4 right-5 z-10 text-(--hero-ink)/70 [--d:0.2s] md:right-8" />
+      <ThemeToggle className="hero-in absolute top-4 right-5 text-paper/80 hover:text-paper [--d:0.2s] md:right-8" />
 
-      {/* 3. Mark, wordmark, tagline */}
-      <div className="hero-content flex flex-col items-center">
-        <div className="relative w-[min(78vw,400px)]">
-          <div aria-hidden className="hero-halo absolute -inset-[30%] -z-10 rounded-full" />
-          <div className="hero-in [--d:0.4s]">
-            <CrossMark className="w-full" label="CLVRY — winged crucifix on the hill" />
-          </div>
+      <div className="hero-ink flex flex-col items-center">
+        <div className="hero-in w-[min(64vw,320px)] [--d:0.3s]">
+          <CrossMark className="w-full opacity-80" label="CLVRY — winged crucifix on the hill" />
         </div>
 
-        <h1 className="hero-in mt-10 w-[min(84vw,540px)] [--d:0.6s] md:mt-12">
-          <Wordmark className="w-full" label="CLVRY" />
+        <h1 className="hero-in mt-8 w-[min(76vw,440px)] [--d:0.5s] md:mt-10">
+          <Wordmark className="w-full opacity-80" label="CLVRY" />
         </h1>
 
-        <p className="mt-6 font-display text-xs uppercase tracking-[0.45em] opacity-80 md:text-sm">
-          <span className="sr-only">{TAGLINE}</span>
-          <span aria-hidden>
-            {[...TAGLINE].map((ch, i) => (
-              <span key={i} className="hero-letter" style={{ "--i": i } as React.CSSProperties}>
-                {ch}
-              </span>
-            ))}
-          </span>
+        <p className="hero-in mt-5 font-display text-xs uppercase tracking-[0.5em] [--d:0.8s] md:text-sm">
+          Christ Above All
         </p>
 
-        <div className="hero-in mt-12 [--d:2.3s]">
+        <div className="hero-in mt-10 [--d:1.1s]">
           <EarlyAccessButton className="h-12 px-9" />
         </div>
-        <Socials className="hero-in mt-8 [--d:2.5s]" />
-      </div>
-
-      {/* Scroll cue */}
-      <div aria-hidden className="hero-in absolute bottom-6 left-1/2 -translate-x-1/2 [--d:2.9s]">
-        <div className="hero-cue relative h-14 w-px overflow-hidden bg-(--hero-ink)/20" />
+        <Socials className="hero-in mt-6 [--d:1.3s]" />
       </div>
     </HeroStage>
   );
