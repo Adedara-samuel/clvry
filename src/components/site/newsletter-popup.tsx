@@ -2,28 +2,13 @@
 
 import { useEffect } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { whenIntroDone } from "@/lib/intro";
 import { useUi } from "@/store/ui";
 import { NewsletterForm } from "./newsletter-form";
 import { Socials } from "./socials";
 
-const POPUP_DELAY_MS = 2000;
-
-/** Resolves once the intro screen has finished (or immediately if it was skipped). */
-function whenIntroDone(callback: () => void) {
-  const html = document.documentElement;
-  if (html.dataset.intro === "seen") {
-    callback();
-    return () => {};
-  }
-  const observer = new MutationObserver(() => {
-    if (html.dataset.intro === "seen") {
-      observer.disconnect();
-      callback();
-    }
-  });
-  observer.observe(html, { attributes: true, attributeFilter: ["data-intro"] });
-  return () => observer.disconnect();
-}
+// Long enough for the hero's entrance (≈3s) to finish before the dialog covers it.
+const POPUP_DELAY_MS = 3500;
 
 /**
  * Minimal "Get early access" popup. Opens 2 seconds after the intro finishes, and whenever a

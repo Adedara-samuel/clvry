@@ -1,0 +1,38 @@
+<!-- CLVRY WRLD hero: plays the intro once, then loops seamlessly -->
+<section class="clvry-hero">
+  <video class="clvry-hero__intro" src="clvry_hero_intro.mp4" poster="clvry_hero_poster.jpg"
+         autoplay muted playsinline preload="auto"></video>
+  <video class="clvry-hero__loop" muted playsinline loop preload="auto">
+    <source src="clvry_hero_loop.webm" type="video/webm">
+    <source src="clvry_hero_loop.mp4" type="video/mp4">
+  </video>
+</section>
+
+<style>
+  .clvry-hero { position: relative; width: 100%; height: 100vh; min-height: 560px;
+                overflow: hidden; background: #0d0a09; }
+  .clvry-hero video { position: absolute; inset: 0; width: 100%; height: 100%;
+                      object-fit: cover; object-position: 62% center; }
+  .clvry-hero__loop { opacity: 0; }
+  .clvry-hero.is-looping .clvry-hero__loop { opacity: 1; }
+  .clvry-hero.is-looping .clvry-hero__intro { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .clvry-hero video { display: none; }
+    .clvry-hero { background: #0d0a09 url(clvry_hero_poster.jpg) 62% center / cover no-repeat; }
+  }
+</style>
+
+<script>
+  (function () {
+    var hero = document.querySelector('.clvry-hero');
+    var intro = hero.querySelector('.clvry-hero__intro');
+    var loop = hero.querySelector('.clvry-hero__loop');
+    function startLoop() {
+      loop.currentTime = 0;
+      loop.play().then(function () { hero.classList.add('is-looping'); })
+                 .catch(function () { hero.classList.add('is-looping'); });
+    }
+    intro.addEventListener('ended', startLoop);
+    intro.addEventListener('error', startLoop);
+  })();
+</script>
