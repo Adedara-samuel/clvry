@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Cinzel, Geist, Geist_Mono } from "next/font/google";
-import { Intro } from "@/components/site/intro";
 import { Toaster } from "@/components/ui/sonner";
 import { themeInitScript } from "@/store/theme";
 import { Providers } from "./providers";
@@ -41,7 +40,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        <Intro />
         <Providers>
           {children}
           <Toaster position="bottom-right" />

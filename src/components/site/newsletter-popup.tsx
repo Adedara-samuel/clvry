@@ -2,18 +2,17 @@
 
 import { useEffect } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { whenIntroDone } from "@/lib/intro";
 import { useUi } from "@/store/ui";
 import { NewsletterForm } from "./newsletter-form";
 import { Socials } from "./socials";
 
-// Long enough for the hero's opening sequence (≈4.2s) to finish before the dialog covers it.
-const POPUP_DELAY_MS = 5000;
+// Long enough for the hero's opening sequence (≈4.6s) to finish before the dialog covers it.
+const POPUP_DELAY_MS = 5500;
 
 /**
- * Minimal "Get early access" popup. Opens 2 seconds after the intro finishes, and whenever a
- * "Get early access" button is pressed. Skipped if the visitor already subscribed; once closed it
- * won't auto-open again until the page is refreshed.
+ * Minimal "Get early access" popup. Opens once the hero's opening sequence has played, and
+ * whenever a "Get early access" button is pressed. Skipped if the visitor already subscribed;
+ * once closed it won't auto-open again until the page is refreshed.
  */
 export function NewsletterPopup() {
   const open = useUi((s) => s.popupOpen);
@@ -21,14 +20,8 @@ export function NewsletterPopup() {
   const dismissPopup = useUi((s) => s.dismissPopup);
 
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    const stop = whenIntroDone(() => {
-      timer = setTimeout(openPopup, POPUP_DELAY_MS);
-    });
-    return () => {
-      stop();
-      clearTimeout(timer);
-    };
+    const timer = setTimeout(openPopup, POPUP_DELAY_MS);
+    return () => clearTimeout(timer);
   }, [openPopup]);
 
   return (
@@ -37,7 +30,7 @@ export function NewsletterPopup() {
         <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">CLVRY</p>
         <DialogTitle className="mt-3 font-display text-2xl font-normal uppercase">Get early access</DialogTitle>
         <DialogDescription className="mt-3 text-sm leading-relaxed">
-          The shop, the music and the album are coming soon. Be the first to know.
+          The shop and the album are coming soon. Be the first to know.
         </DialogDescription>
         <NewsletterForm variant="plain" onSubscribed={() => setTimeout(dismissPopup, 1800)} />
         <Socials className="mt-8 justify-start" />
