@@ -28,6 +28,8 @@ function escapeHtml(value: string) {
 
 export type NewSubscriber = {
   email: string;
+  /** Optional, as typed by the subscriber (already validated). */
+  phone?: string;
   submittedAt: Date;
   /** Page the form was submitted from, if known. */
   pageUrl?: string;
@@ -36,7 +38,7 @@ export type NewSubscriber = {
 const CID_WORDMARK = "clvry-wordmark";
 const CID_MARK = "clvry-mark";
 
-export function newSubscriberEmail({ email, submittedAt, pageUrl }: NewSubscriber) {
+export function newSubscriberEmail({ email, phone, submittedAt, pageUrl }: NewSubscriber) {
   const when = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "full",
     timeStyle: "short",
@@ -48,9 +50,12 @@ export function newSubscriberEmail({ email, submittedAt, pageUrl }: NewSubscribe
 
   const rows: [string, string][] = [
     ["Email", `<a href="${escapeHtml(mailto)}" style="color:${c.wine};text-decoration:none;font-weight:600;">${safeEmail}</a>`],
-    ["Signed up", `${escapeHtml(when)} UTC`],
-    ["Source", "CLVRY website &middot; Newsletter sign-up form"],
   ];
+  if (phone) {
+    const tel = `tel:${phone.replace(/[^\d+]/g, "")}`;
+    rows.push(["Phone", `<a href="${escapeHtml(tel)}" style="color:${c.wine};text-decoration:none;font-weight:600;">${escapeHtml(phone)}</a>`]);
+  }
+  rows.push(["Signed up", `${escapeHtml(when)} UTC`], ["Source", "CLVRY website &middot; Newsletter sign-up form"]);
   if (pageUrl) rows.push(["Page", escapeHtml(pageUrl)]);
 
   const detailRows = rows
@@ -195,6 +200,7 @@ export function newSubscriberEmail({ email, submittedAt, pageUrl }: NewSubscribe
     "Someone just joined the CLVRY newsletter through the sign-up form on the website.",
     "",
     `Email: ${email}`,
+    ...(phone ? [`Phone: ${phone}`] : []),
     `Signed up: ${when} UTC`,
     "Source: CLVRY website · Newsletter sign-up form",
     ...(pageUrl ? [`Page: ${pageUrl}`] : []),

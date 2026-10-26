@@ -229,7 +229,7 @@ The stack's three state/validation libraries each have one job:
 
 | Route            | Method | Body                 | Response                                       |
 | ---------------- | ------ | -------------------- | ---------------------------------------------- |
-| `/api/subscribe` | POST   | `{ "email": string }` | `200 { ok: true }`, or `400`/`429`/`500` `{ ok: false, error }`. Emails the sign-up to `CONTACT_TO_EMAIL` |
+| `/api/subscribe` | POST   | `{ "email": string, "phone"?: string }` | `200 { ok: true }`, or `400`/`429`/`500` `{ ok: false, error }`. Emails the sign-up to `CONTACT_TO_EMAIL` |
 | `/api/products`  | GET    | none                 | `Product[]` (placeholder, parked Shop)         |
 | `/api/tracks`    | GET    | none                 | `Track[]` (placeholder, parked Circle Sessions)|
 

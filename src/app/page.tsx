@@ -31,15 +31,19 @@ import { ScriptureTicker } from "@/components/site/scripture-ticker";
 export default function Home() {
   return (
     <>
-      <ScriptureTicker />
-      {/* <Header /> */}
-      <main>
-        <Hero />
-        {/* <Marquee /> */}
-        {/* <ComingSoon /> */}
-        {/* <Newsletter /> */}
-      </main>
-      {/* <Footer /> */}
+      {/* The landing page is always dark; the theme toggle only restyles the dialog (which
+          portals outside this wrapper). Other pages follow the theme as usual. */}
+      <div data-theme="dark" className="min-h-svh bg-background text-foreground">
+        <ScriptureTicker />
+        {/* <Header /> */}
+        <main>
+          <Hero />
+          {/* <Marquee /> */}
+          {/* <ComingSoon /> */}
+          {/* <Newsletter /> */}
+        </main>
+        {/* <Footer /> */}
+      </div>
       <NewsletterPopup />
     </>
   );

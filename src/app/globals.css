@@ -13,8 +13,12 @@
  * `goldenrod` is the antique gold lifted for legibility as text on black/wine; `antique` is the
  * exact brand gold (logos, borders, text on cream).
  * shadcn's semantic tokens (background, primary, …) are mapped onto the same palette below.
+ *
+ * Any element with data-theme="dark" re-declares the dark tokens, pinning its subtree to dark
+ * whatever <html> says (the landing page uses this so the toggle only affects dialogs there).
  */
-:root {
+:root,
+[data-theme="dark"] {
   --night: #0a0a0a;
   --paper: #f2ebdd;
   --wine: #780008;
@@ -317,47 +321,17 @@ body::after {
   }
 }
 
-/*
- * Legibility over the video: cream (light) or near-black (dark) gathers behind the text and thins
- * out toward the edges. Registered as <color> so the theme switch cross-fades instead of snapping.
- */
-@property --hero-ink {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #f0e8dc;
-}
-@property --hero-pool {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #0e0b0a;
-}
-.hero {
-  --hero-ink: #f0e8dc;
-  --hero-pool: #0e0b0a;
-  transition:
-    --hero-ink 0.5s ease,
-    --hero-pool 0.5s ease;
-}
-:root[data-theme="light"] .hero {
-  --hero-ink: #121212;
-  --hero-pool: #f0e8dc;
-}
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) .hero {
-    --hero-ink: #121212;
-    --hero-pool: #f0e8dc;
-  }
-}
+/* Legibility over the video: near-black gathers behind the text and thins out toward the edges. */
 .hero-pool {
   background: radial-gradient(
     ellipse 42% 58% at 50% 50%,
-    color-mix(in srgb, var(--hero-pool) 72%, transparent) 0%,
-    color-mix(in srgb, var(--hero-pool) 45%, transparent) 45%,
-    color-mix(in srgb, var(--hero-pool) 8%, transparent) 100%
+    rgb(14 11 10 / 0.72) 0%,
+    rgb(14 11 10 / 0.45) 45%,
+    rgb(14 11 10 / 0.08) 100%
   );
 }
 .hero-ink {
-  color: var(--hero-ink);
+  color: #f0e8dc;
 }
 
 /*

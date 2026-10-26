@@ -23,8 +23,10 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label="Toggle light and dark theme"
       className={cn("text-muted-foreground hover:text-gold", className)}
     >
-      <SunIcon className="hidden dark:block" strokeWidth={1.5} />
-      <MoonIcon className="dark:hidden" strokeWidth={1.5} />
+      {/* Keyed to <html> rather than `dark:` so the icon stays right inside a pinned-dark
+          section (e.g. the landing page). */}
+      <SunIcon className="hidden [:root[data-theme=dark]_&]:block" strokeWidth={1.5} />
+      <MoonIcon className="[:root[data-theme=dark]_&]:hidden" strokeWidth={1.5} />
     </Button>
   );
 }

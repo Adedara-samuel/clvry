@@ -25,39 +25,49 @@ const styles = {
     form: "mt-8 gap-4",
     input:
       "h-11 rounded-none border-0 border-b border-foreground/30 bg-transparent px-0 text-base shadow-none placeholder:text-muted-foreground focus-visible:border-foreground focus-visible:ring-0 dark:bg-transparent",
-    button: "h-11 w-full",
+    button: "mt-2 h-11 w-full",
     done: "mt-8 text-gold",
     error: "text-destructive",
   },
 };
 
-/** Email sign-up used by both the page section (`wine`) and the popup (`plain`). */
+type Field = "email" | "phone";
+
+/**
+ * Sign-up used by both the page section (`wine`) and the popup (`plain`).
+ * `withPhone` adds an optional phone number field under the email.
+ */
 export function NewsletterForm({
   onSubscribed,
   variant = "wine",
+  withPhone = false,
 }: {
   onSubscribed?: () => void;
   variant?: keyof typeof styles;
+  withPhone?: boolean;
 }) {
   const look = styles[variant];
   const id = useId();
   const [email, setEmail] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState<{ field: Field; message: string } | null>(null);
   const subscribe = useSubscribe();
   const subscribed = useUi((s) => s.subscribed);
   const markSubscribed = useUi((s) => s.markSubscribed);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const parsed = subscribeSchema.safeParse({ email });
+    const parsed = subscribeSchema.safeParse(withPhone ? { email, phone } : { email });
     if (!parsed.success) {
-      setError(parsed.error.issues[0]?.message ?? "Invalid email");
+      const issue = parsed.error.issues[0];
+      setError({ field: issue?.path[0] === "phone" ? "phone" : "email", message: issue?.message ?? "Invalid details" });
       return;
     }
     setError(null);
     subscribe.mutate(parsed.data, {
       onSuccess: () => {
         setEmail("");
+        setPhone("");
         markSubscribed();
         toast.success("You're on the list. Grace and peace.");
         onSubscribed?.();
@@ -75,20 +85,39 @@ export function NewsletterForm({
   return (
     <>
       <form onSubmit={onSubmit} noValidate className={cn("flex w-full flex-col", look.form)}>
-        <Label htmlFor={id} className="sr-only">
+        <Label htmlFor={`${id}-email`} className="sr-only">
           Email address
         </Label>
         <Input
-          id={id}
+          id={`${id}-email`}
           type="email"
           autoComplete="email"
           placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          aria-invalid={Boolean(error)}
-          aria-describedby={error ? `${id}-error` : undefined}
+          aria-invalid={error?.field === "email"}
+          aria-describedby={error?.field === "email" ? `${id}-error` : undefined}
           className={look.input}
         />
+        {withPhone && (
+          <>
+            <Label htmlFor={`${id}-phone`} className="sr-only">
+              Phone number (optional)
+            </Label>
+            <Input
+              id={`${id}-phone`}
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              placeholder="Phone number (optional)"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              aria-invalid={error?.field === "phone"}
+              aria-describedby={error?.field === "phone" ? `${id}-error` : undefined}
+              className={look.input}
+            />
+          </>
+        )}
         <Button
           type="submit"
           disabled={subscribe.isPending}
@@ -99,7 +128,7 @@ export function NewsletterForm({
       </form>
       {error && (
         <p id={`${id}-error`} role="alert" className={cn("mt-3 text-sm", look.error)}>
-          {error}
+          {error.message}
         </p>
       )}
     </>

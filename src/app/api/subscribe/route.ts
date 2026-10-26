@@ -47,6 +47,7 @@ export async function POST(request: Request) {
     await sendNotification(
       newSubscriberEmail({
         email: parsed.data.email,
+        phone: parsed.data.phone,
         submittedAt: new Date(),
         pageUrl: pageUrlFrom(request),
       }),
