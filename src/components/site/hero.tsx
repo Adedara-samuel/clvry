@@ -4,20 +4,25 @@ import { HeroStage } from "./hero-stage";
 import { Socials } from "./socials";
 import { ThemeToggle } from "./theme-toggle";
 
+/*
+ * Opening sequence, once the intro screen lifts (timings in globals.css):
+ *   1. The classic hero: cream (or black) with the wine glow, mark and wordmark.
+ *   2. An iris opens from the cross and reveals the video underneath.
+ *   3. Mark and wordmark dissolve, and their space closes so the tagline and CTA settle centre.
+ *   4. The video plays once and freezes on its final frame ("Welcome to CLVRY WRLD").
+ */
 export function Hero() {
   return (
     <HeroStage
       // The scripture ticker above is ~2rem, so the hero plus ticker fill exactly one screen.
       className="hero relative isolate flex min-h-[calc(100svh-2rem)] flex-col items-center justify-center overflow-hidden bg-black px-6 py-20 text-center"
     >
-      {/* Video. It fades up from black and back down to black, so the loop seam is invisible.
-          No poster attribute: a still of the finished shot would flash, then cut to black. The
-          poster sits underneath as the reduced-motion / failure still. */}
-      <div aria-hidden className="hero-still absolute inset-0 -z-20">
+      {/* Video. No poster attribute: it opens on black, and a still of the final frame would flash
+          first. The poster sits underneath as the reduced-motion / failure still. */}
+      <div aria-hidden className="hero-still absolute inset-0 -z-30">
         <video
           className="hero-video size-full object-cover"
           muted
-          loop
           playsInline
           preload="auto"
           disablePictureInPicture
@@ -29,28 +34,37 @@ export function Hero() {
         </video>
       </div>
 
-      {/* A soft pool of light (cream) or shade (dark) behind the mark; the edges stay clear video. */}
-      <div aria-hidden className="hero-pool absolute inset-0 -z-10" />
+      {/* A soft pool of light (cream) or shade (dark) so the text stays legible over the video. */}
+      <div aria-hidden className="hero-pool absolute inset-0 -z-20" />
 
-      <ThemeToggle className="hero-in absolute top-4 right-5 text-paper/80 hover:text-paper [--d:0.2s] md:right-8" />
+      {/* The classic hero backdrop; the iris opens through it. */}
+      <div aria-hidden className="hero-cover absolute inset-0 -z-10 bg-background">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,var(--wine)_0%,transparent_60%)] opacity-(--glow)" />
+      </div>
+
+      {/* Difference blend keeps the icon visible on cream, black and video alike. */}
+      <ThemeToggle className="hero-in absolute top-4 right-5 text-white mix-blend-difference hover:text-white [--d:0.1s] md:right-8" />
 
       <div className="hero-ink flex flex-col items-center">
-        <div className="hero-in w-[min(64vw,320px)] [--d:0.3s]">
-          <CrossMark className="w-full opacity-80" label="CLVRY — winged crucifix on the hill" />
+        <div className="hero-brand">
+          <div className="hero-brand-inner flex flex-col items-center">
+            <div className="w-[min(64vw,320px)]">
+              <CrossMark className="w-full" label="CLVRY — winged crucifix on the hill" />
+            </div>
+            <h1 className="mt-8 mb-5 w-[min(76vw,440px)] md:mt-10">
+              <Wordmark className="w-full" label="CLVRY" />
+            </h1>
+          </div>
         </div>
 
-        <h1 className="hero-in mt-8 w-[min(76vw,440px)] [--d:0.5s] md:mt-10">
-          <Wordmark className="w-full opacity-80" label="CLVRY" />
-        </h1>
-
-        <p className="hero-in mt-5 font-display text-xs uppercase tracking-[0.5em] [--d:0.8s] md:text-sm">
+        <p className="hero-in font-display text-xs uppercase tracking-[0.5em] [--d:0.15s] md:text-sm">
           Christ Above All
         </p>
 
-        <div className="hero-in mt-10 [--d:1.1s]">
+        <div className="hero-in mt-10 [--d:0.3s]">
           <EarlyAccessButton className="h-12 px-9" />
         </div>
-        <Socials className="hero-in mt-6 [--d:1.3s]" />
+        <Socials className="hero-in mt-6 [--d:0.4s]" />
       </div>
     </HeroStage>
   );

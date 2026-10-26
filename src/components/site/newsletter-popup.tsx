@@ -7,8 +7,8 @@ import { useUi } from "@/store/ui";
 import { NewsletterForm } from "./newsletter-form";
 import { Socials } from "./socials";
 
-// Long enough for the hero's entrance (≈3s) to finish before the dialog covers it.
-const POPUP_DELAY_MS = 3500;
+// Long enough for the hero's opening sequence (≈4.2s) to finish before the dialog covers it.
+const POPUP_DELAY_MS = 5000;
 
 /**
  * Minimal "Get early access" popup. Opens 2 seconds after the intro finishes, and whenever a
