@@ -16,7 +16,7 @@ Developed by [Sapok](https://sapoktech.vercel.app).
 - [Project structure](#project-structure)
 - [Brand system](#brand-system)
 - [Theming (light / dark)](#theming-light--dark)
-- [Intro loading screen](#intro-loading-screen)
+- [Hero](#hero)
 - [Scripture ticker](#scripture-ticker)
 - [Early access and socials](#early-access-and-socials)
 - [Data layer](#data-layer)
@@ -57,7 +57,7 @@ npm run dev
 
 Open http://localhost:3000.
 
-> The loading screen plays on every page load (~3s). The early-access popup opens 2 seconds after it finishes.
+> The hero's opening sequence plays on every page load (~4.5s). The early-access popup opens 5.5 seconds after load.
 
 ## Scripts
 
@@ -76,7 +76,7 @@ assets/brand/            Original logo JPGs (source files, not served)
 public/brand/            Transparent PNG logos used by the site (see Brand system)
 src/
   app/
-    layout.tsx           Root layout: fonts, <head> init script, Intro, Providers, Toaster
+    layout.tsx           Root layout: fonts, <head> init script, Providers, Toaster
     page.tsx             The landing page (and how to re-enable parked sections)
     providers.tsx        TanStack QueryClientProvider + Devtools
     globals.css          Tailwind v4 theme: brand tokens, shadcn tokens, light/dark, animations
@@ -88,16 +88,15 @@ src/
   components/
     brand/logo.tsx       <CrossMark />, <HeartLogo />, <Wordmark />
     site/                Page sections
-      intro.tsx            Loading screen: emblem with the spinning C, on cream
       scripture-ticker.tsx Top bar: scrolling Luke 23:32, Gal 6:14, Heb 12:2 (NKJV) on wine
       header.tsx           Sticky header, mobile Sheet menu, theme toggle
-      hero.tsx             Hero: cross follows the pointer, early-access button, socials
-      pointer-stage.tsx    Writes eased pointer position to --mx/--my for the hero effects
+      hero.tsx             Hero: classic open, iris reveals the video, mark dissolves (see Hero)
+      hero-stage.tsx       Plays the hero video once, pauses it off-screen / in hidden tabs
       early-access-button.tsx  Glass-prism "Get early access" button → opens the popup
       socials.tsx          Instagram / X links (@clvrywrld), from lib/socials.ts
       social-icon.tsx      Inline Instagram / X glyphs
       newsletter-form.tsx  Shared sign-up form (`wine` band style / `plain` popup style)
-      newsletter-popup.tsx Minimal early-access popup, opens 2s after the loading screen
+      newsletter-popup.tsx Minimal early-access popup, opens 5.5s after load
       marquee.tsx          Scrolling wine/gold ticker
       coming-soon.tsx      "Everything else is on the way" feature cards
       newsletter.tsx       Email sign-up (Zod + TanStack mutation + toast)
@@ -144,7 +143,7 @@ From the **CLVRY Brand Bible**: Primary Wine `#780008` (garments/graphics), Deep
 | `ink`       | `bg-ink`              | theme-aware | Page background (night ↔ paper)                   |
 | `bone`      | `text-bone`           | theme-aware | Page text (paper ↔ night)                         |
 
-**Rule of thumb:** on surfaces whose color never changes (the wine sign-up band, the fire announcement bar, the intro) use the fixed tokens `paper`, `night` and `goldenrod`. Everywhere else, use shadcn's semantic classes (`bg-background`, `text-foreground`, `text-muted-foreground`, `bg-card`, `border-border` …) or `text-gold`, so both themes work.
+**Rule of thumb:** on surfaces whose color never changes (the wine sign-up band, the fire announcement bar, text over the hero video) use the fixed tokens `paper`, `night` and `goldenrod`. Everywhere else, use shadcn's semantic classes (`bg-background`, `text-foreground`, `text-muted-foreground`, `bg-card`, `border-border` …) or `text-gold`, so both themes work.
 
 The corner radius is `0` on purpose (`--radius: 0rem`). Sharp edges suit streetwear, so every shadcn component inherits square corners.
 
@@ -162,7 +161,7 @@ The corner radius is `0` on purpose (`--radius: 0rem`). Sharp edges suit streetw
 | `<CrossMark />`  | `public/brand/mark.png`    | Winged crucifix on the hill               |
 | `<HeartLogo />`  | `public/brand/heart.png`   | CLVRY lettering in the heart (header)     |
 | `<Wordmark />`   | `public/brand/wordmark.png`| CLVRY serif wordmark (hero, footer)       |
-| `<Emblem />` (`brand/emblem.tsx`) | `public/brand/emblem-ring.png` + `emblem-c.png` | Cross through the oval with the C inside (loading screen) |
+| `<Emblem />` (`brand/emblem.tsx`) | `public/brand/emblem-ring.png` + `emblem-c.png` | Cross through the oval with the C inside (currently unused) |
 
 The emblem is cut from `public/brand/clvry-c-logo.jpeg` into two masks on the same 329×482 canvas: the oval and cross, and the C on its own (isolated as the connected shape inside the oval) so it can spin. Its pivot, `origin-[45.9%_65.8%]`, is the C's measured centre. If the logo file changes, regenerate both PNGs the same way and re-measure the pivot.
 
@@ -188,21 +187,22 @@ To replace a logo, export a new black-on-white image and regenerate the transpar
 
 To change a color in one theme only, edit the `:root` block (dark default) or the `:root[data-theme="light"]` block. Keep the no-JS fallback block in sync with the light block.
 
-## Intro loading screen
+## Hero
 
-[`src/components/site/intro.tsx`](src/components/site/intro.tsx) plays on **every page load**, always in light colors:
+[`hero.tsx`](src/components/site/hero.tsx) plays a short opening sequence on every page load:
 
-1. On cream, the CLVRY emblem (Deep Antique Gold) settles in over a soft breathing gold glow.
-2. The C spins steadily on its vertical axis inside the oval: one full turn every 1.4s, linear, no pauses.
-3. A hairline fills underneath, then the screen slides up and away (~3s total).
+1. The classic hero: cream (or black) with the wine glow, the winged cross and the wordmark.
+2. At 0.6s an iris opens from the cross and reveals the video underneath.
+3. At 2.8s the mark and wordmark dissolve, and their space closes so the button and socials glide up to the centre.
+4. The video plays **once** and freezes on its final frame ("Welcome to CLVRY WRLD"). "Christ Above All" then rises in at the top left.
 
 How it works:
 
-- The animation is **pure CSS** (`.intro*` rules in `globals.css`) and the overlay is server-rendered, so it covers the page before React hydrates.
-- Page scroll is locked while it plays. When the exit animation ends, JS sets `data-intro="seen"` on `<html>`, which hides the overlay, unlocks scrolling, and starts the popup timer. A 4.5s timeout does the same as a safety net.
-- `prefers-reduced-motion` users get a short static version (no spin).
-
-To change the spin speed, edit `.intro-spin` in `globals.css`. To change the overall length, edit the `intro-exit` delay and keep the safety-net timeout in `intro.tsx` longer than the whole sequence.
+- The sequence is **pure CSS**. The timings are the `.hero-cover`, `.hero-brand*` and `.hero-in` rules in `globals.css`, and each element's `--d` delay in `hero.tsx`.
+- The video files are in `public/videos/`: `clvry-hero.webm` and `clvry-hero.mp4` for desktop, and a 720p `clvry-hero-mobile.mp4` for screens under 768px. All are made from `public/brand/clvry_hero_intro.mp4` with the audio stripped and `+faststart`. `public/images/clvry-hero-poster.jpg` is its final frame.
+- [`hero-stage.tsx`](src/components/site/hero-stage.tsx) pauses the video when the hero is off-screen or the tab is hidden, and never restarts it once it has ended.
+- A radial "pool" of cream (light) or near-black (dark) behind the text keeps it legible over the footage, and it cross-fades when the theme changes.
+- `prefers-reduced-motion` users skip straight to the end state: the poster as a still, with no animation.
 
 ### Scrollbar
 
@@ -240,7 +240,7 @@ The stack's three state/validation libraries each have one job:
 The sign-up form (`newsletter-form.tsx`) appears in two places:
 
 - the wine **"The list"** section on the page (`#notify`, currently commented out), and
-- a minimal **"Get early access" popup** (`newsletter-popup.tsx`, shadcn Dialog, theme-aware, with one underlined email field). It opens automatically **2 seconds after the loading screen finishes** (`POPUP_DELAY_MS`), unless the visitor already signed up or closed it during this page load (that state lives in the Zustand UI store, in memory only, so a refresh resets it). It also opens any time someone clicks **Get early access**.
+- a minimal **"Get early access" popup** (`newsletter-popup.tsx`, shadcn Dialog, theme-aware, with one underlined email field). It opens automatically **5.5 seconds after load**, once the hero's opening sequence has played (`POPUP_DELAY_MS`), unless the visitor already signed up or closed it during this page load (that state lives in the Zustand UI store, in memory only, so a refresh resets it). It also opens any time someone clicks **Get early access**.
 
 Every sign-up on the website sends a branded notification email to the inbox in `CONTACT_TO_EMAIL`.
 
@@ -310,7 +310,7 @@ This project uses Next.js 16 with **Cache Components** (`cacheComponents: true` 
 Things that bit during setup:
 
 - **No `Date.now()` during prerender.** TanStack's `dehydrate()` and `useQuery()` read the clock. So server prefetching lives in a `"use cache"` function (`lib/prefetch.ts`), and any client component that calls `useQuery` must be wrapped in `<Suspense>`.
-- **Don't export non-component values from `"use client"` files** and import them into server components; they arrive as client references, not values. That's why `introInitScript` lives in `lib/intro.ts`, not in `intro.tsx`.
+- **Don't export non-component values from `"use client"` files** and import them into server components; they arrive as client references, not values. That's why `themeInitScript` lives in `store/theme.ts`, not in a component file.
 - Tailwind v4 no longer gives buttons a pointer cursor. A base rule in `globals.css` restores `cursor: pointer` for every clickable element (`a[href]`, enabled buttons, `[role=button]`, `label[for]`, …) and `not-allowed` for disabled ones.
 
 ## Conventions

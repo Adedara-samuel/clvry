@@ -28,7 +28,7 @@ export function NewsletterPopup() {
     <Dialog open={open} onOpenChange={(next) => !next && dismissPopup()}>
       <DialogContent className="gap-0 rounded-none bg-background p-8 text-foreground ring-1 ring-border sm:max-w-sm sm:p-10">
         <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">CLVRY</p>
-        <DialogTitle className="mt-3 font-display text-2xl font-normal uppercase">Get early access</DialogTitle>
+        <DialogTitle className="mt-3 font-display text-xl font-normal">Become a member</DialogTitle>
         <DialogDescription className="mt-3 text-sm leading-relaxed">
           The shop and the album are coming soon. Be the first to know.
         </DialogDescription>
