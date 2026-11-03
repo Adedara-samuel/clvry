@@ -111,8 +111,8 @@ export default function EventsPage() {
               <li key={f.n} className="flex items-center gap-4 border-b border-border py-4">
                 <span className="text-gold">{f.n}</span>
                 <span className="flex-1">{f.name}</span>
-                <span className="text-muted-foreground">City TBA</span>
-                <span className="w-16 text-right text-muted-foreground">Date TBA</span>
+                <span className="whitespace-nowrap text-muted-foreground">City TBA</span>
+                <span className="whitespace-nowrap text-muted-foreground">Date TBA</span>
               </li>
             ))}
           </ul>

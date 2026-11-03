@@ -99,10 +99,11 @@ export function ExploreBanner({
       />
 
       <div className="flex items-start justify-between px-5 pt-5 md:px-10 md:pt-8">
-        <Link href="/" aria-label="CLVRY home" className="text-gold md:hidden">
-          <CrossMark className="w-9" />
+        {/* Small frosted plates keep these legible over whatever frame sits behind them */}
+        <Link href="/" aria-label="CLVRY home" className="bg-background/70 p-1.5 text-gold backdrop-blur-sm md:hidden">
+          <CrossMark className="w-8" />
         </Link>
-        <p className="ml-auto font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/80">
+        <p className="ml-auto bg-background/70 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground backdrop-blur-sm">
           Explore — N° {index} / {String(exploreSections.length).padStart(2, "0")}
         </p>
       </div>
