@@ -4,6 +4,7 @@ import { CrossIcon, Disc3Icon, ShirtIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { CrossMark } from "@/components/brand/logo";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { exploreSections, type ExploreSlug } from "@/lib/explore";
@@ -15,6 +16,41 @@ const icons: Record<ExploreSlug, typeof CrossIcon> = { ethos: CrossIcon, garment
 const spring = "ease-[cubic-bezier(0.34,1.45,0.64,1)]";
 
 /**
+ * Phone dock behaviour: tuck away while scrolling down, return on any scroll up. Always shown
+ * near the top and at the very bottom (where the "Continue" link is). Small jitters are ignored.
+ */
+function useTuckOnScroll() {
+  const [tucked, setTucked] = useState(false);
+
+  useEffect(() => {
+    let last = window.scrollY;
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const atBottom = y + window.innerHeight >= document.documentElement.scrollHeight - 40;
+        if (y < 80 || atBottom) {
+          setTucked(false);
+        } else if (Math.abs(y - last) > 6) {
+          setTucked(y > last);
+        } else {
+          return;
+        }
+        last = y;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return tucked;
+}
+
+/**
  * Explore navigation, Ethos first: frosted-glass docks floating over the page.
  *  - md+: a vertical capsule at the left edge. A glowing wine pill springs to the open section;
  *    hovering (or focusing) an icon slides out a glass preview card with the section's cover.
@@ -24,6 +60,7 @@ const spring = "ease-[cubic-bezier(0.34,1.45,0.64,1)]";
 export function ExploreNav() {
   const pathname = usePathname();
   const active = exploreSections.findIndex((s) => s.href === pathname);
+  const tucked = useTuckOnScroll();
 
   return (
     <>
@@ -101,7 +138,10 @@ export function ExploreNav() {
       {/* Phone dock */}
       <nav
         aria-label="Explore"
-        className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 md:hidden"
+        className={cn(
+          "fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)] md:hidden",
+          tucked && "pointer-events-none translate-y-[calc(100%+2rem)] opacity-0",
+        )}
       >
         <ul className="glass-dock relative grid grid-cols-3 rounded-full p-1.5">
           <span
