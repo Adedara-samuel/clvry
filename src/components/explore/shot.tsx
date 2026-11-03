@@ -11,16 +11,19 @@ export function Shot({
   caption,
   crop,
   sizes = "(min-width: 768px) 50vw, 100vw",
+  reveal = true,
   className,
 }: {
   image: ExploreImage;
   caption?: React.ReactNode;
   crop?: string;
   sizes?: string;
+  /** Rise in on scroll. Turn off inside horizontal scrollers, whose view timeline runs sideways. */
+  reveal?: boolean;
   className?: string;
 }) {
   return (
-    <figure className={cn("reveal group", className)}>
+    <figure className={cn("group", reveal && "reveal", className)}>
       <div className={cn("overflow-hidden bg-ink-soft", crop)}>
         <Image
           src={image.src}

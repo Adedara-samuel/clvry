@@ -4,7 +4,6 @@ import { Header } from "@/components/site/header";
 import { Hero } from "@/components/site/hero";
 import { Marquee } from "@/components/site/marquee";
 import { Newsletter } from "@/components/site/newsletter";
-import { NewsletterPopup } from "@/components/site/newsletter-popup";
 import { ScriptureTicker } from "@/components/site/scripture-ticker";
 
 /*
@@ -32,7 +31,7 @@ export default function Home() {
   return (
     <>
       {/* The landing page is always dark; the theme toggle only restyles the dialog (which
-          portals outside this wrapper). Other pages follow the theme as usual. */}
+          portals outside this wrapper, from the root layout). Other pages follow the theme as usual. */}
       <div data-theme="dark" className="min-h-svh bg-background text-foreground">
         <ScriptureTicker />
         {/* <Header /> */}
@@ -44,7 +43,6 @@ export default function Home() {
         </main>
         {/* <Footer /> */}
       </div>
-      <NewsletterPopup />
     </>
   );
 }

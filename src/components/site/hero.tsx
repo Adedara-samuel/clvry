@@ -1,5 +1,6 @@
+import { ArrowRightIcon } from "lucide-react";
+import Link from "next/link";
 import { CrossMark, Wordmark } from "@/components/brand/logo";
-import { EarlyAccessButton } from "./early-access-button";
 import { HeroStage } from "./hero-stage";
 import { Socials } from "./socials";
 import { ThemeToggle } from "./theme-toggle";
@@ -44,7 +45,7 @@ export function Hero() {
       </div>
 
       {/* Arrives as the video freezes (~3.6s), so it only ever sits on the footage: always cream. */}
-      <p className="hero-in absolute top-1 left-5 font-display text-sm uppercase tracking-[0.2em] text-f [text-shadow:0_1px_12px_rgb(0_0_0/0.45)] [--d:3.6s] md:top-5 md:left-10 md:text-base ">
+      <p className="hero-in absolute top-1 left-5 font-display text-sm uppercase tracking-[0.2em] text-paper [text-shadow:0_1px_12px_rgb(0_0_0/0.45)] [--d:3.6s] md:top-5 md:left-10 md:text-base ">
         Christ Above All
       </p>
 
@@ -64,7 +65,14 @@ export function Hero() {
         </div>
 
         <div className="hero-in mt-5 [--d:0.3s]">
-          <EarlyAccessButton className="h-12 px-9" />
+          {/* Opens Explore on Ethos */}
+          <Link
+            href="/explore/ethos"
+            className="btn-prism group inline-flex h-12 items-center justify-center gap-3 px-9 font-mono text-[11px] uppercase tracking-[0.25em] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Explore
+            <ArrowRightIcon strokeWidth={1.5} className="size-3.5 transition duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
         <Socials className="hero-in mt-6 [--d:0.4s]" />
       </div>

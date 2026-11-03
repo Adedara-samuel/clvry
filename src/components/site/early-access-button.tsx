@@ -3,8 +3,8 @@
 import { cn } from "@/lib/utils";
 import { useUi } from "@/store/ui";
 
-/** Glass-prism CTA that opens the early-access popup. */
-export function EarlyAccessButton({ className, children = "Become a member" }: { className?: string; children?: React.ReactNode }) {
+/** Glass-prism CTA that opens the newsletter popup. */
+export function EarlyAccessButton({ className, children = "Subscribe" }: { className?: string; children?: React.ReactNode }) {
   const showPopup = useUi((s) => s.showPopup);
   return (
     <button

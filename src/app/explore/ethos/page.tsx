@@ -124,7 +124,7 @@ export default function EthosPage() {
 
       {/* Scripture */}
       <section className="grid bg-wine text-paper md:grid-cols-2">
-        <Shot image={ethos["red-crucifix"]} crop="aspect-[4/5] md:aspect-auto md:h-full" className="md:h-full [&>div]:h-full" />
+        <Shot image={ethos["red-crucifix"]} crop="aspect-[4/5] md:aspect-auto md:h-full" className="md:h-full" />
         <blockquote className="reveal flex flex-col justify-center gap-8 px-5 py-16 md:px-16 md:py-24">
           <span aria-hidden className="font-display text-7xl leading-none text-goldenrod/60">“</span>
           <p className="font-display text-3xl leading-tight uppercase md:text-5xl">

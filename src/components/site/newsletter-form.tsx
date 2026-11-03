@@ -123,7 +123,7 @@ export function NewsletterForm({
           disabled={subscribe.isPending}
           className={cn("font-mono text-[11px] uppercase tracking-[0.25em]", look.button)}
         >
-          {subscribe.isPending ? "Joining…" : "Join"}
+          {subscribe.isPending ? "Subscribing…" : "Subscribe"}
         </Button>
       </form>
       {error && (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cinzel, Geist, Geist_Mono } from "next/font/google";
+import { NewsletterPopup } from "@/components/site/newsletter-popup";
 import { Toaster } from "@/components/ui/sonner";
 import { themeInitScript } from "@/store/theme";
 import { Providers } from "./providers";
@@ -42,6 +43,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col font-sans">
         <Providers>
           {children}
+          {/* One instance for every route: inactive pages stay mounted (hidden), so a per-page
+              popup would double up. */}
+          <NewsletterPopup />
           <Toaster position="bottom-right" />
         </Providers>
       </body>
