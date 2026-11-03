@@ -1,104 +1,133 @@
 "use client";
 
+import { CrossIcon, Disc3Icon, ShirtIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CrossMark } from "@/components/brand/logo";
 import { ThemeToggle } from "@/components/site/theme-toggle";
-import { exploreSections } from "@/lib/explore";
+import { exploreSections, type ExploreSlug } from "@/lib/explore";
 import { cn } from "@/lib/utils";
 
+const icons: Record<ExploreSlug, typeof CrossIcon> = { ethos: CrossIcon, garment: ShirtIcon, events: Disc3Icon };
+
+// Spring with a little overshoot, so the pill lands rather than stops.
+const spring = "ease-[cubic-bezier(0.34,1.45,0.64,1)]";
+
 /**
- * Explore navigation: a vertical rail down the left edge from md up, a tab bar along the
- * bottom on phones. Same three links, Ethos first.
+ * Explore navigation, Ethos first: frosted-glass docks floating over the page.
+ *  - md+: a vertical capsule at the left edge. A glowing wine pill springs to the open section;
+ *    hovering (or focusing) an icon slides out a glass preview card with the section's cover.
+ *  - Phones: a capsule floating at the bottom, icon over label, with the same sliding pill.
+ * The pills are the one rounded shape on the site: they read as light, not as UI chrome.
  */
 export function ExploreNav() {
   const pathname = usePathname();
+  const active = exploreSections.findIndex((s) => s.href === pathname);
 
   return (
     <>
-      {/* Desktop rail */}
+      {/* Desktop dock */}
       <nav
         aria-label="Explore"
-        className="fixed inset-y-0 left-0 z-40 hidden w-24 flex-col items-center justify-between border-r border-border bg-background py-8 md:flex"
+        className="glass-dock fixed top-1/2 left-5 z-40 hidden -translate-y-1/2 flex-col items-center gap-3 rounded-full p-2 md:flex"
       >
-        <Link href="/" aria-label="CLVRY home" className="text-gold transition hover:text-foreground">
-          <CrossMark className="w-11" />
+        <Link
+          href="/"
+          aria-label="CLVRY home"
+          className="flex size-12 items-center justify-center rounded-full text-gold transition hover:bg-foreground/8 hover:text-foreground"
+        >
+          <CrossMark className="w-7" />
         </Link>
+        <span aria-hidden className="h-px w-6 bg-foreground/15" />
 
-        <ul className="flex w-full flex-col gap-12">
-          {exploreSections.map((s) => {
-            const active = pathname === s.href;
+        <ul className="relative flex flex-col gap-2">
+          {/* The pill: 3rem items + 0.5rem gaps, so each step is 3.5rem */}
+          <span
+            aria-hidden
+            className={cn(
+              "dock-pill absolute top-0 left-0 size-12 rounded-full transition-[transform,opacity] duration-700",
+              spring,
+              active < 0 && "opacity-0",
+            )}
+            style={{ transform: `translateY(${Math.max(active, 0) * 3.5}rem)` }}
+          />
+          {exploreSections.map((s, i) => {
+            const on = i === active;
+            const Icon = icons[s.slug];
             return (
-              <li key={s.slug} className="relative flex justify-center">
+              <li key={s.slug} className="group relative">
                 <Link
                   href={s.href}
-                  aria-current={active ? "page" : undefined}
+                  aria-label={s.name}
+                  aria-current={on ? "page" : undefined}
                   className={cn(
-                    "group flex flex-col items-center gap-4 transition",
-                    active ? "text-foreground" : "text-muted-foreground hover:text-gold",
+                    "relative flex size-12 items-center justify-center rounded-full transition duration-300",
+                    on ? "text-paper" : "text-muted-foreground hover:bg-foreground/8 hover:text-foreground",
                   )}
                 >
-                  <span className={cn("font-mono text-[10px] tracking-[0.2em]", active && "text-gold")}>{s.index}</span>
-                  {/* Reads bottom-to-top, like a spine on a shelf */}
-                  <span className="rotate-180 font-display text-sm uppercase tracking-[0.4em] [writing-mode:vertical-rl]">
-                    {s.name}
-                  </span>
-                  <span
-                    aria-hidden
-                    className={cn(
-                      "size-1.5 rotate-45 transition",
-                      active ? "bg-wine ring-1 ring-gold" : "bg-transparent group-hover:bg-gold/50",
-                    )}
-                  />
+                  <Icon strokeWidth={1.4} className="size-[1.15rem] transition-transform duration-300 group-hover:scale-110" />
                 </Link>
-                {/* Gold hairline on the rail's edge marks the open page */}
-                <span
+
+                {/* Preview card */}
+                <div
                   aria-hidden
                   className={cn(
-                    "absolute top-0 -right-px h-full w-px bg-gold transition-opacity duration-500",
-                    active ? "opacity-100" : "opacity-0",
+                    "glass-dock pointer-events-none absolute top-1/2 left-full ml-5 w-52 -translate-x-2 -translate-y-1/2 rounded-3xl p-2 opacity-0 transition duration-300",
+                    "group-hover:translate-x-0 group-hover:opacity-100 group-has-focus-visible:translate-x-0 group-has-focus-visible:opacity-100",
                   )}
-                />
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-ink-soft">
+                    <Image src={s.cover.src} alt="" fill sizes="208px" className="object-cover" />
+                    <div className="absolute inset-0 bg-linear-to-t from-night/70 to-transparent" />
+                    <span className="absolute bottom-2.5 left-3 font-mono text-[9px] tracking-[0.25em] text-goldenrod">
+                      N° {s.index}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between px-2 pt-2.5 pb-1">
+                    <span className="font-display text-sm uppercase tracking-[0.2em] text-foreground">{s.name}</span>
+                    <span className="text-[11px] text-muted-foreground">{s.tagline}</span>
+                  </div>
+                </div>
               </li>
             );
           })}
         </ul>
 
-        <div className="flex flex-col items-center gap-5">
-          <ThemeToggle />
-          <span className="rotate-180 font-mono text-[9px] uppercase tracking-[0.4em] text-muted-foreground [writing-mode:vertical-rl]">
-            CLVRY WRLD
-          </span>
-        </div>
+        <span aria-hidden className="h-px w-6 bg-foreground/15" />
+        <ThemeToggle className="size-12 rounded-full" />
       </nav>
 
-      {/* Phone tab bar */}
+      {/* Phone dock */}
       <nav
         aria-label="Explore"
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
+        className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 md:hidden"
       >
-        <ul className="grid grid-cols-3">
-          {exploreSections.map((s) => {
-            const active = pathname === s.href;
+        <ul className="glass-dock relative grid grid-cols-3 rounded-full p-1.5">
+          <span
+            aria-hidden
+            className={cn(
+              "dock-pill absolute inset-y-1.5 left-1.5 w-[calc((100%-0.75rem)/3)] rounded-full transition-[transform,opacity] duration-700",
+              spring,
+              active < 0 && "opacity-0",
+            )}
+            style={{ transform: `translateX(${Math.max(active, 0) * 100}%)` }}
+          />
+          {exploreSections.map((s, i) => {
+            const on = i === active;
+            const Icon = icons[s.slug];
             return (
-              <li key={s.slug}>
+              <li key={s.slug} className="relative">
                 <Link
                   href={s.href}
-                  aria-current={active ? "page" : undefined}
+                  aria-current={on ? "page" : undefined}
                   className={cn(
-                    "relative flex h-16 flex-col items-center justify-center gap-1.5 transition",
-                    active ? "text-foreground" : "text-muted-foreground",
+                    "flex h-14 flex-col items-center justify-center gap-1 transition-colors duration-500",
+                    on ? "text-paper" : "text-muted-foreground",
                   )}
                 >
-                  <span
-                    aria-hidden
-                    className={cn(
-                      "absolute inset-x-8 top-0 h-px bg-gold transition-opacity duration-500",
-                      active ? "opacity-100" : "opacity-0",
-                    )}
-                  />
-                  <span className={cn("font-mono text-[9px] tracking-[0.2em]", active && "text-gold")}>{s.index}</span>
-                  <span className="font-display text-xs uppercase tracking-[0.3em]">{s.name}</span>
+                  <Icon strokeWidth={1.4} className={cn("size-[1.1rem] transition-transform duration-500", on && "-translate-y-px scale-110")} />
+                  <span className="font-mono text-[9px] uppercase tracking-[0.25em]">{s.name}</span>
                 </Link>
               </li>
             );

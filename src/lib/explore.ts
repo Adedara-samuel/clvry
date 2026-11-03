@@ -64,10 +64,32 @@ export const events = shots("events", {
 });
 
 /** Nav order: Ethos first — what we believe comes before what we wear. */
+// `cover` and `tagline` fill the nav's hover preview card.
 export const exploreSections = [
-  { slug: "ethos", href: "/explore/ethos", index: "01", name: "Ethos" },
-  { slug: "garment", href: "/explore/garment", index: "02", name: "Garment" },
-  { slug: "events", href: "/explore/events", index: "03", name: "Events" },
+  {
+    slug: "ethos",
+    href: "/explore/ethos",
+    index: "01",
+    name: "Ethos",
+    tagline: "What we believe",
+    cover: ethos["carrying-the-cross"],
+  },
+  {
+    slug: "garment",
+    href: "/explore/garment",
+    index: "02",
+    name: "Garment",
+    tagline: "What we wear",
+    cover: garment.heavyweights,
+  },
+  {
+    slug: "events",
+    href: "/explore/events",
+    index: "03",
+    name: "Events",
+    tagline: "Where we gather",
+    cover: events["speaker-cross"],
+  },
 ] as const;
 
 export type ExploreSlug = (typeof exploreSections)[number]["slug"];
