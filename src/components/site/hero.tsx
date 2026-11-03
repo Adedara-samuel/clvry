@@ -44,7 +44,7 @@ export function Hero() {
       </div>
 
       {/* Arrives as the video freezes (~3.6s), so it only ever sits on the footage: always cream. */}
-      <p className="hero-in absolute top-5 left-5 font-display text-sm uppercase tracking-[0.5em] text-paper [text-shadow:0_1px_12px_rgb(0_0_0/0.45)] [--d:3.6s] md:top-8 md:left-10 md:text-base">
+      <p className="hero-in absolute top-1 left-5 font-display text-sm uppercase tracking-[0.2em] text-f [text-shadow:0_1px_12px_rgb(0_0_0/0.45)] [--d:3.6s] md:top-5 md:left-10 md:text-base ">
         Christ Above All
       </p>
 

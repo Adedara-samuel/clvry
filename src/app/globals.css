@@ -388,6 +388,39 @@ body::after {
   }
 }
 
+/* ---------- Explore pages ---------- */
+
+/* Banner frames develop in like a print: from soft and oversized to sharp. */
+.explore-frame-in {
+  animation: explore-frame-in 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.explore-rise {
+  animation: hero-rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+}
+@keyframes explore-frame-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: blur(6px);
+  }
+}
+
+/* Content rises in as it scrolls into view where scroll-driven animations exist; elsewhere it's
+   simply there. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
 /* ---------- Scrollbar: wine thumb on the page background ---------- */
 html {
   scrollbar-width: thin;
@@ -414,7 +447,10 @@ html {
   .animate-ticker,
   .animate-spin-slow,
   .btn-prism::before,
-  .hero-in {
+  .hero-in,
+  .explore-frame-in,
+  .explore-rise,
+  .reveal {
     animation: none;
   }
   /* Skip straight to the end state: the final frame as a still, no backdrop, no mark. */
