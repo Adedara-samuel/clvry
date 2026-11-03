@@ -25,7 +25,8 @@ export function ExploreNext({ current }: { current: ExploreSlug }) {
         className="group flex flex-col justify-center gap-4 px-5 py-16 transition-colors duration-500 hover:bg-wine md:px-12 md:py-24"
       >
         <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-muted-foreground transition-colors group-hover:text-paper/70">
-          {last ? "Begin again" : "Continue"} — N° {next.index}
+          {last ? "Begin again" : "Continue"}
+          <span className="hidden md:inline"> — N° {next.index}</span>
         </p>
         <p className="font-display text-5xl uppercase leading-none tracking-[0.12em] transition-colors group-hover:text-paper md:text-7xl">
           {next.name}

@@ -103,7 +103,7 @@ export function ExploreBanner({
         <Link href="/" aria-label="CLVRY home" className="bg-background/70 p-1.5 text-gold backdrop-blur-sm md:hidden">
           <CrossMark className="w-8" />
         </Link>
-        <p className="ml-auto bg-background/70 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground backdrop-blur-sm">
+        <p className="ml-auto hidden bg-background/70 px-2.5 py-1.5 md:block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground backdrop-blur-sm">
           Explore — N° {index} / {String(exploreSections.length).padStart(2, "0")}
         </p>
       </div>
