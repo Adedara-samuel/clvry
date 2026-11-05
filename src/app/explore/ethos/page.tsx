@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { ExploreBanner } from "@/components/explore/explore-banner";
 import { ExploreNext } from "@/components/explore/explore-next";
+import { ExploreBoard, ExploreRail, GalleryHeading } from "@/components/explore/explore-gallery";
 import { Shot } from "@/components/explore/shot";
-import { ethos } from "@/lib/explore";
+import { bannerPool, cathedrals, ethos, paintings, type ExploreImage } from "@/lib/explore";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -37,20 +38,15 @@ const pillars = [
   },
 ];
 
-// The reference board: everything we look at when we make.
-const board = [
-  ethos["three-angels"],
-  ethos.heaven,
-  ethos["hill-crucifix"],
-  ethos.seal,
-  ethos["jesus-is-king"],
-  ethos.rosary,
-  ethos["screen-cross"],
-  ethos["jesus-is-alive"],
-  ethos["last-supper"],
-  ethos.crucifixion,
-  ethos["sin-no-more"],
-];
+// Shown in the creed, pillars and scripture; everything else in Ethos goes on the board.
+const featured = new Set<ExploreImage>([
+  ethos.sanctuary,
+  ethos.communion,
+  ethos["glass-cross"],
+  ethos["red-crucifix"],
+  ...pillars.map((p) => p.image),
+]);
+const board = Object.values(ethos).filter((img) => !featured.has(img));
 
 export default function EthosPage() {
   return (
@@ -59,7 +55,7 @@ export default function EthosPage() {
         index="01"
         name="Ethos"
         line="Before the cloth, the cross. What we believe, and why we make anything at all."
-        images={Object.values(ethos)}
+        images={bannerPool(ethos, cathedrals, paintings)}
       />
 
       {/* The creed */}
@@ -122,6 +118,14 @@ export default function EthosPage() {
         </div>
       </section>
 
+      <ExploreRail
+        eyebrow="Sanctuaries"
+        title="Rooms built for glory"
+        note="Gothic naves, painted domes, concrete and light. Where the street learned to look up."
+        images={Object.values(cathedrals)}
+        label="Sanctuary"
+      />
+
       {/* Scripture */}
       <section className="grid bg-wine text-paper md:grid-cols-2">
         <Shot image={ethos["red-crucifix"]} crop="aspect-[4/5] md:aspect-auto md:h-full" className="md:h-full" />
@@ -136,29 +140,24 @@ export default function EthosPage() {
         </blockquote>
       </section>
 
+      <ExploreRail
+        eyebrow="The masters"
+        title="Told in oil and glass"
+        note="Centuries of hands painting the same story. We're only picking up where they left off."
+        images={Object.values(paintings)}
+        label="Plate"
+        className="border-t-0"
+      />
+
       {/* The reference board */}
-      <section className="px-5 py-20 md:px-12 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— The board</p>
-              <h2 className="mt-4 font-display text-3xl uppercase md:text-5xl">What we look at when we make</h2>
-            </div>
-            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Old masters and street signs, engravings and flags. The same story, told in every material.
-            </p>
-          </div>
-          <div className="mt-12 columns-2 gap-3 md:mt-16 md:columns-3 md:gap-5">
-            {board.map((image, i) => (
-              <Shot
-                key={image.src}
-                image={image}
-                caption={`Fig. ${String(i + 4).padStart(2, "0")}`}
-                sizes="(min-width: 768px) 33vw, 50vw"
-                className="mb-6 break-inside-avoid md:mb-8"
-              />
-            ))}
-          </div>
+      <section className="border-t border-border px-5 py-20 md:px-12 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <GalleryHeading
+            eyebrow="The board"
+            title="What we look at when we make"
+            note="Old masters and street signs, engravings and neon. The same story, told in every material."
+          />
+          <ExploreBoard images={board} className="mt-12 md:mt-16" />
         </div>
       </section>
 

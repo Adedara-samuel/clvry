@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { ExploreBanner } from "@/components/explore/explore-banner";
 import { ExploreNext } from "@/components/explore/explore-next";
 import { GarmentIndex, type GarmentLine } from "@/components/explore/garment-index";
+import { ExploreBoard, ExploreRail, GalleryHeading } from "@/components/explore/explore-gallery";
 import { Shot } from "@/components/explore/shot";
-import { garment } from "@/lib/explore";
+import { bannerPool, garment, street } from "@/lib/explore";
 
 export const metadata: Metadata = {
   title: "Garment — CLVRY",
@@ -40,13 +41,20 @@ const lines: GarmentLine[] = [
 // Lookbook rail. It ends on the empty rail: the rest is still to come.
 const looks = [
   garment["falling-tees"],
+  garment["faith-jacket"],
   garment.crewnecks,
   garment["darkness-light"],
+  garment["together-in-faith"],
   garment["denim-wall"],
+  garment["barcode-poster"],
   garment.overshirts,
+  garment["rodeo-cross"],
   garment["the-way-cap"],
   garment["coming-soon"],
 ];
+
+// Where the cloth goes: the city, plus the two car pieces from the garment board.
+const outside = [...Object.values(street), garment["yellow-car"], garment["the-way-car"]];
 
 export default function GarmentPage() {
   return (
@@ -55,7 +63,7 @@ export default function GarmentPage() {
         index="02"
         name="Garment"
         line="Cloth carried from the hill. Cut plain, printed with the Word."
-        images={Object.values(garment)}
+        images={bannerPool(garment, street)}
       />
 
       {/* The atelier */}
@@ -100,30 +108,24 @@ export default function GarmentPage() {
         </div>
       </section>
 
-      {/* Lookbook */}
-      <section className="border-t border-border py-20 md:py-32">
-        <div className="flex items-end justify-between gap-6 px-5 md:px-12">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— Lookbook</p>
-            <h2 className="mt-4 font-display text-3xl uppercase md:text-5xl">Vol. 00</h2>
-          </div>
-          <p aria-hidden className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            Swipe →
-          </p>
+      <ExploreRail
+        eyebrow="Lookbook"
+        title="Vol. 00"
+        note="Swipe through. The last frame is an empty rail. The rest is still to come."
+        images={looks}
+        label="Look"
+      />
+
+      {/* Out in the street */}
+      <section className="border-t border-border px-5 py-20 md:px-12 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <GalleryHeading
+            eyebrow="Out in the street"
+            title="Where the cloth goes"
+            note="Crossings, billboards and back roads. The Word was always meant to be worn outside."
+          />
+          <ExploreBoard images={outside} label="Street" className="mt-12 md:mt-16" />
         </div>
-        <ol className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mt-16 md:gap-6 md:px-12">
-          {looks.map((image, i) => (
-            <li key={image.src} className="w-[72vw] shrink-0 snap-start md:w-[26vw]">
-              <Shot
-                image={image}
-                crop="aspect-[3/4]"
-                caption={`Look ${String(i + 1).padStart(2, "0")}`}
-                sizes="(min-width: 768px) 26vw, 72vw"
-                reveal={false}
-              />
-            </li>
-          ))}
-        </ol>
       </section>
 
       <ExploreNext current="garment" />

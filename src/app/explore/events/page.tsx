@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { ExploreBanner } from "@/components/explore/explore-banner";
 import { ExploreNext } from "@/components/explore/explore-next";
+import { ExploreBoard, GalleryHeading } from "@/components/explore/explore-gallery";
 import { Shot } from "@/components/explore/shot";
 import { EarlyAccessButton } from "@/components/site/early-access-button";
-import { events } from "@/lib/explore";
+import { bannerPool, events } from "@/lib/explore";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -35,6 +36,16 @@ const formats = [
   },
 ];
 
+const room = [
+  events["red-cathedral"],
+  events["hands-up"],
+  events["the-booth"],
+  events["crowd-of-light"],
+  events["dj-hands"],
+  events["heals-the-broken"],
+  events["red-room"],
+];
+
 export default function EventsPage() {
   return (
     <>
@@ -42,7 +53,7 @@ export default function EventsPage() {
         index="03"
         name="Events"
         line="Where we gather. Worship with a street sound, art on the walls, the people in the room."
-        images={Object.values(events)}
+        images={bannerPool(events)}
       />
 
       {/* Statement */}
@@ -91,6 +102,18 @@ export default function EventsPage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      {/* In the room */}
+      <section className="border-t border-border px-5 py-20 md:px-12 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <GalleryHeading
+            eyebrow="In the room"
+            title="The feeling we're chasing"
+            note="Hands up, lights low, the cross at the centre of it. This is the night we're building toward."
+          />
+          <ExploreBoard images={room} label="Night" className="mt-12 md:mt-16" />
+        </div>
       </section>
 
       {/* The calendar: nothing announced yet, so it says so and points to the list. */}
