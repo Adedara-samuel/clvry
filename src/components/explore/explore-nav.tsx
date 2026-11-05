@@ -55,7 +55,8 @@ function useTuckOnScroll() {
  *  - md+: a vertical capsule at the left edge. A glowing wine pill springs to the open section;
  *    hovering (or focusing) an icon slides out a glass preview card with the section's cover.
  *  - Phones: a capsule floating at the bottom, icon over label, with the same sliding pill.
- * The pills are the one rounded shape on the site: they read as light, not as UI chrome.
+ * The docks are the one rounded shape on the site: they read as light, not as UI chrome. Radii are
+ * explicit because the theme's --radius is 0 (so rounded-2xl etc. resolve to square).
  */
 export function ExploreNav() {
   const pathname = usePathname();
@@ -110,11 +111,11 @@ export function ExploreNav() {
                 <div
                   aria-hidden
                   className={cn(
-                    "glass-dock pointer-events-none absolute top-1/2 left-full ml-5 w-52 -translate-x-2 -translate-y-1/2 rounded-3xl p-2 opacity-0 transition duration-300",
+                    "glass-dock pointer-events-none absolute top-1/2 left-full ml-5 w-52 -translate-x-2 -translate-y-1/2 rounded-[1.5rem] p-2 opacity-0 transition duration-300",
                     "group-hover:translate-x-0 group-hover:opacity-100 group-has-focus-visible:translate-x-0 group-has-focus-visible:opacity-100",
                   )}
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-ink-soft">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-[1rem] bg-ink-soft">
                     <Image src={s.cover.src} alt="" fill sizes="208px" className="object-cover" />
                     <div className="absolute inset-0 bg-linear-to-t from-night/70 to-transparent" />
                     <span className="absolute bottom-2.5 left-3 font-mono text-[9px] tracking-[0.25em] text-goldenrod">
