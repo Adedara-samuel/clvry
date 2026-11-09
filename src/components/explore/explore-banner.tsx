@@ -111,7 +111,7 @@ export function ExploreBanner({
       <div className="explore-rise absolute inset-x-0 bottom-0 px-5 pb-6 md:px-10 md:pb-10">
         {/* "The Ethos", "The Garment", "The Events": the article sits small above the name so the
             name itself can stay large on a phone. */}
-        <h1 className="font-display uppercase leading-none">
+        <h1 className="font-display uppercase leading-none dark:[text-shadow:0_2px_18px_rgb(0_0_0/0.55)]">
           <span className="block text-xl tracking-[0.3em] text-gold md:text-3xl">The</span>
           <span className="mt-1 block text-5xl tracking-[0.12em] md:mt-2 md:text-8xl">{name}</span>
         </h1>
