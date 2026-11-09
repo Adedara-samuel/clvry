@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ExploreBanner } from "@/components/explore/explore-banner";
 import { ExploreNext } from "@/components/explore/explore-next";
 import { GarmentIndex, type GarmentLine } from "@/components/explore/garment-index";
-import { ExploreBoard, ExploreRail, GalleryHeading } from "@/components/explore/explore-gallery";
+import { ExploreBoard, GalleryHeading } from "@/components/explore/explore-gallery";
 import { Shot } from "@/components/explore/shot";
 import { bannerPool, garment, street } from "@/lib/explore";
 
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     "Cloth carried from the hill. Tees, denim, truckers, knits and polos from CLVRY: the first drop is in the works.",
 };
 
-// CLVRY's own pieces, from the product mockups. Names are working titles.
-const drop = [
+// Design: CLVRY's own pieces, from the product mockups. Names are working titles.
+const design = [
   { name: "Christ Above All Raglan", image: garment["christ-above-all-raglan"] },
   { name: "Script Polo — Olive", image: garment["polo-olive"] },
   { name: "Saved by the Cross Trucker — Burgundy", image: garment["cross-trucker-burgundy"] },
@@ -33,71 +33,41 @@ const drop = [
   { name: "Call on Jesus Ringer", image: garment["call-on-jesus"] },
   { name: "Focus on Jesus Ringer", image: garment["focus-on-jesus"] },
   { name: "Crew Socks", image: garment["crew-socks"] },
+  { name: "CLVRY Wrld Corduroy Caps", image: garment["clvry-caps"] },
+  { name: "Crown of Thorns Beanie", image: garment["thorn-beanies"] },
 ];
 
-// Each family leads with an image that crops well to the 4:5 preview.
+// Garments: plain cloth only, no graphics. Each family leads with an image that crops well to the
+// 4:5 preview.
 const lines: GarmentLine[] = [
   {
     n: "01",
     name: "Tees",
-    note: "Heavyweight graphics, ringers and raglans, printed with the Word.",
-    images: [
-      garment["only-jesus-saves-charcoal"],
-      garment["follow-christ"],
-      garment["tree-tee-bone"],
-      garment["christ-above-all-raglan"],
-      garment.heavyweights,
-      garment.sleeveless,
-    ],
+    note: "Heavyweight blanks in wine, clay, moss and bone.",
+    images: [garment.crewnecks, garment.heavyweights, garment.sleeveless, garment["colour-rail"]],
   },
   {
     n: "02",
     name: "Denim",
-    note: "Wide legs and jorts: cross pockets, 'Jesus Saves' at the cuff.",
-    images: [garment["wide-denim"], garment.jorts, garment["raw-hems"], garment["denim-wall"], garment["rolled-denim"]],
+    note: "Raw hems in every wash, made to be broken in.",
+    images: [garment["raw-hems"], garment["denim-wall"], garment["rolled-denim"]],
   },
   {
     n: "03",
-    name: "Headwear",
-    note: "Saved by the Cross truckers, corduroy caps and thorn knits.",
-    images: [
-      garment["cross-trucker-burgundy"],
-      garment["cross-trucker-black"],
-      garment["clvry-caps"],
-      garment["thorn-beanies"],
-      garment["the-way-cap"],
-    ],
-  },
-  {
-    n: "04",
-    name: "Knits & polos",
-    note: "Script polos and the crucifix knit vest.",
-    images: [garment["polo-olive"], garment["crucifix-vest"], garment["polo-navy"], garment.overshirts, garment["colour-rail"]],
-  },
-  {
-    n: "05",
-    name: "Essentials",
-    note: "Crew socks marked with the cross.",
-    images: [garment.crewnecks, garment["crew-socks"]],
+    name: "Layers",
+    note: "Overshirts and outer layers for the in-between seasons.",
+    images: [garment.overshirts, garment["faith-jacket"], garment["coming-soon"]],
   },
 ];
 
-// Lookbook rail: opens on the burgundy truckers, ends on the empty rail. The rest is still to come.
-const looks = [
-  garment["cross-trucker-burgundy"],
-  garment["faith-jacket"],
-  garment.crewnecks,
+// Where the cloth goes: the city, plus the graphic pieces from other makers that move us.
+const outside = [
+  ...Object.values(street),
+  garment["the-way-car"],
   garment["darkness-light"],
-  garment["together-in-faith"],
-  garment["cross-trucker-black"],
-  garment["denim-wall"],
-  garment.overshirts,
   garment["the-way-cap"],
-  garment["coming-soon"],
+  garment["together-in-faith"],
 ];
-
-// Where the cloth goes: the city, plus the car piece from the garment board.
-const outside = [...Object.values(street), garment["the-way-car"]];
 
 export default function GarmentPage() {
   return (
@@ -142,56 +112,48 @@ export default function GarmentPage() {
         </div>
       </section>
 
-      {/* The first drop: CLVRY's own pieces on a paper ground (multiply melts the mockups'
-          white backdrops into it, so every card reads as one set). */}
-      <section className="border-t border-border px-5 py-20 md:px-12 md:py-32">
-        <div className="mx-auto max-w-7xl">
+      {/* Design: CLVRY's own pieces as a swipeable rail. Each sits on a paper ground (multiply melts
+          the mockups' white backdrops into it, so every card reads as one set). */}
+      <section className="border-t border-border py-20 md:py-32">
+        <div className="px-5 md:px-12">
           <GalleryHeading
-            eyebrow="The first drop"
-            title="Pieces from the atelier"
-            note="In development now. Names, colours and details may change before release."
+            eyebrow="CLVRY Studios"
+            title="Design"
+            note="Our own pieces, in development now. Swipe through. Names, colours and details may change before release."
           />
-          <ul className="mt-12 grid grid-cols-2 gap-x-3 gap-y-10 md:mt-16 md:grid-cols-3 md:gap-x-6 md:gap-y-14">
-            {drop.map((piece, i) => (
-              <li key={piece.image.src} className="reveal group">
-                <div className="relative aspect-[5/4] overflow-hidden bg-[#ece7dd]">
-                  <Image
-                    src={piece.image.src}
-                    alt={piece.image.alt}
-                    fill
-                    sizes="(min-width: 768px) 30vw, 50vw"
-                    className="object-contain p-2 mix-blend-multiply transition duration-700 ease-out group-hover:scale-[1.04] md:p-4"
-                  />
-                  <span className="absolute top-3 left-3 font-mono text-[9px] tracking-[0.25em] text-night/45">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <div className="mt-3 flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-4">
-                  <p className="font-display text-xs uppercase tracking-[0.12em] md:text-sm">{piece.name}</p>
-                  <p className="shrink-0 font-mono text-[9px] uppercase tracking-[0.25em] text-gold">Coming soon</p>
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
+        <ol className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mt-16 md:gap-6 md:px-12">
+          {design.map((piece, i) => (
+            <li key={piece.image.src} className="group w-[72vw] shrink-0 snap-start md:w-[26vw]">
+              <div className="relative aspect-[4/5] overflow-hidden bg-[#ece7dd]">
+                <Image
+                  src={piece.image.src}
+                  alt={piece.image.alt}
+                  fill
+                  sizes="(min-width: 768px) 26vw, 72vw"
+                  className="object-contain p-3 mix-blend-multiply transition duration-700 ease-out group-hover:scale-[1.04] md:p-5"
+                />
+                <span className="absolute top-3 left-3 font-mono text-[9px] tracking-[0.25em] text-night/45">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <div className="mt-3 flex items-baseline justify-between gap-4">
+                <p className="font-display text-xs uppercase tracking-[0.12em] md:text-sm">{piece.name}</p>
+                <p className="shrink-0 font-mono text-[9px] uppercase tracking-[0.25em] text-gold">Coming soon</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      {/* The line */}
+      {/* Garments: the plain cloth, no graphics */}
       <section className="border-t border-border px-5 py-20 md:px-12 md:py-32">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— The line</p>
-          <h2 className="mt-4 mb-12 font-display text-3xl uppercase md:mb-16 md:text-5xl">Five families of cloth</h2>
+          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— The cloth</p>
+          <h2 className="mt-4 mb-12 font-display text-3xl uppercase md:mb-16 md:text-5xl">Garments</h2>
           <GarmentIndex lines={lines} />
         </div>
       </section>
-
-      <ExploreRail
-        eyebrow="Lookbook"
-        title="Vol. 00"
-        note="Swipe through. The last frame is an empty rail. The rest is still to come."
-        images={looks}
-        label="Look"
-      />
 
       {/* Out in the street */}
       <section className="border-t border-border px-5 py-20 md:px-12 md:py-32">
@@ -199,7 +161,7 @@ export default function GarmentPage() {
           <GalleryHeading
             eyebrow="Out in the street"
             title="Where the cloth goes"
-            note="Crossings, billboards and back roads. The Word was always meant to be worn outside."
+            note="Crossings, billboards, back roads, and the pieces that move us. The Word was always meant to be worn outside."
           />
           <ExploreBoard images={outside} label="Street" className="mt-12 md:mt-16" />
         </div>
