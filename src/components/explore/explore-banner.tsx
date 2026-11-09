@@ -109,8 +109,12 @@ export function ExploreBanner({
       </div>
 
       <div className="explore-rise absolute inset-x-0 bottom-0 px-5 pb-6 md:px-10 md:pb-10">
-        <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">This is</p>
-        <h1 className="mt-2 font-display text-5xl uppercase leading-none tracking-[0.12em] md:text-8xl">{name}</h1>
+        {/* "The Ethos", "The Garment", "The Events": the article sits small above the name so the
+            name itself can stay large on a phone. */}
+        <h1 className="font-display uppercase leading-none">
+          <span className="block text-xl tracking-[0.3em] text-gold md:text-3xl">The</span>
+          <span className="mt-1 block text-5xl tracking-[0.12em] md:mt-2 md:text-8xl">{name}</span>
+        </h1>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-foreground/75 md:text-base">{line}</p>
       </div>
     </header>
