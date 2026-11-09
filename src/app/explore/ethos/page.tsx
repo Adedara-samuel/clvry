@@ -8,37 +8,38 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Ethos — CLVRY",
-  description: "Before the cloth, the cross. What CLVRY believes, and why we make anything at all.",
+  description:
+    "We believe in Jesus Christ, the Son of the living God. Christ above all, saved by grace: the ethos behind CLVRY.",
 };
 
+// The ethos as written by the founders; the creed itself opens the page.
 const pillars = [
   {
     n: "I",
-    title: "Christ above all",
-    body: "Not a slogan on a tag: the order of everything we make. He comes first, and the cloth follows.",
+    title: "The Cross",
+    body: "We believe in the Cross as the ultimate expression of God's love, the price of our redemption and the foundation of our faith.",
     image: ethos["carrying-the-cross"],
   },
   {
     n: "II",
-    title: "Quiet over loud",
-    body: "Heavy cloth, plain cuts, few words. We would rather the Word did the talking.",
-    image: ethos["holy-bible"],
+    title: "Grace",
+    body: "We believe that grace is given, faith is lived, and salvation is found in Christ alone.",
+    image: ethos["praying-hands"],
   },
   {
     n: "III",
-    title: "Sanctuary and street",
-    body: "Faith was never meant to stay indoors. We carry it to the block, the studio and the dance floor.",
-    image: ethos["jesus-saves"],
-  },
-  {
-    n: "IV",
-    title: "Made to be lived in",
-    body: "Clothes for every day, not for the shelf. Worn in and softened, like a well-read Bible.",
+    title: "The gift",
+    body: "Creativity is a gift, and excellence is a responsibility.",
     image: ethos["crown-of-thorns"],
   },
 ];
 
-// Shown in the creed, pillars and scripture; everything else in Ethos goes on the board.
+const mottos = [
+  { line: "Christ above all", latin: "Soli Deo Gloria", meaning: "Glory to God alone" },
+  { line: "Saved by grace", latin: "Solus Christus", meaning: "Christ alone" },
+];
+
+// Shown in the creed, pillars and mottos; everything else in Ethos goes on the board.
 const featured = new Set<ExploreImage>([
   ethos.sanctuary,
   ethos.communion,
@@ -64,13 +65,11 @@ export default function EthosPage() {
           <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— The creed</p>
           <div>
             <p className="reveal font-display text-2xl leading-snug md:text-4xl md:leading-snug">
-              We didn&apos;t make clothes and then go looking for a meaning.{" "}
-              <span className="text-gold">The meaning came first</span>, on a hill called Calvary.
+              We believe in <span className="text-gold">Jesus Christ</span>, the Son of the living God.
             </p>
-            <p className="reveal mt-8 max-w-xl leading-relaxed text-muted-foreground">
-              CLVRY is a Christian creative and lifestyle house: garments, sound and gatherings, carried from
-              the cross into ordinary streets. Everything we cut, print and play starts there, and points back
-              there.
+            <p className="reveal mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              He came, lived, suffered, died and rose again, that through Him we might receive salvation,
+              redemption and eternal life.
             </p>
           </div>
         </div>
@@ -97,7 +96,7 @@ export default function EthosPage() {
       {/* Pillars */}
       <section className="border-t border-border px-5 py-20 md:px-12 md:py-32">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— What we hold to</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— What we believe</p>
           <ol className="mt-12 flex flex-col gap-20 md:mt-20 md:gap-32">
             {pillars.map((p, i) => (
               <li key={p.n} className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
@@ -126,18 +125,25 @@ export default function EthosPage() {
         label="Sanctuary"
       />
 
-      {/* Scripture */}
+      {/* The mottos */}
       <section className="grid bg-wine text-paper md:grid-cols-2">
         <Shot image={ethos["red-crucifix"]} crop="aspect-[4/5] md:aspect-auto md:h-full" className="md:h-full" />
-        <blockquote className="reveal flex flex-col justify-center gap-8 px-5 py-16 md:px-16 md:py-24">
-          <span aria-hidden className="font-display text-7xl leading-none text-goldenrod/60">“</span>
-          <p className="font-display text-3xl leading-tight uppercase md:text-5xl">
-            Neither do I condemn you; go and sin no more.
-          </p>
-          <cite className="font-mono text-[11px] not-italic uppercase tracking-[0.3em] text-goldenrod">
-            John 8:11 <span className="text-paper/50">NKJV</span>
-          </cite>
-        </blockquote>
+        <div className="reveal flex flex-col justify-center px-5 py-16 md:px-16 md:py-24">
+          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-goldenrod">— What we stand on</p>
+          <ul className="mt-10 flex flex-col gap-10">
+            {mottos.map((m) => (
+              <li key={m.latin} className="border-t border-paper/20 pt-8">
+                <p className="font-display text-4xl uppercase leading-tight md:text-6xl">{m.line}</p>
+                <p className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.3em]">
+                  <span lang="la" className="text-goldenrod">
+                    {m.latin}
+                  </span>
+                  <span className="text-paper/60">{m.meaning}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <ExploreRail
