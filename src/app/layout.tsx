@@ -23,7 +23,7 @@ const cinzel = Cinzel({
 });
 
 export const metadata: Metadata = {
-  title: "CLVRY — Wear the Word",
+  title: "CLVRY — Christ Above All",
   description:
     "CLVRY is streetwear carried from the cross: clothing, and Godly music with a street sound. Coming soon.",
 };
