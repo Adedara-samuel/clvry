@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ExploreBanner } from "@/components/explore/explore-banner";
 import { ExploreNext } from "@/components/explore/explore-next";
 import { ExploreBoard, GalleryHeading } from "@/components/explore/explore-gallery";
+import { Playlists } from "@/components/explore/playlists";
 import { Shot } from "@/components/explore/shot";
 import { EarlyAccessButton } from "@/components/site/early-access-button";
 import { bannerPool, events } from "@/lib/explore";
@@ -19,6 +20,7 @@ const formats = [
     title: "Worship on the decks",
     body: "Godly music with a street sound, loud enough to feel in your chest. Praise that doesn't ask you to sit still.",
     images: [events.elevation, events["dj-temry"]],
+    playlists: true,
   },
   {
     n: "02",
@@ -106,6 +108,7 @@ export default function EventsPage() {
                 </p>
                 <h3 className="mt-4 font-display text-3xl uppercase tracking-[0.04em] md:text-5xl">{f.title}</h3>
                 <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">{f.body}</p>
+                {f.playlists && <Playlists className="mt-10" />}
               </div>
             </li>
           ))}
