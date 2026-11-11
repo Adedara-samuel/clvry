@@ -3,7 +3,7 @@ import { ExploreBanner } from "@/components/explore/explore-banner";
 import { ExploreNext } from "@/components/explore/explore-next";
 import { ExploreBoard, ExploreRail, GalleryHeading } from "@/components/explore/explore-gallery";
 import { Shot } from "@/components/explore/shot";
-import { bannerPool, cathedrals, ethos, paintings, type ExploreImage } from "@/lib/explore";
+import { bannerPool, cathedrals, ethos, events, paintings, type ExploreImage } from "@/lib/explore";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -44,7 +44,6 @@ const featured = new Set<ExploreImage>([
   ethos.sanctuary,
   ethos.communion,
   ethos["glass-cross"],
-  ethos["red-crucifix"],
   ...pillars.map((p) => p.image),
 ]);
 const board = Object.values(ethos).filter((img) => !featured.has(img));
@@ -125,9 +124,19 @@ export default function EthosPage() {
         label="Sanctuary"
       />
 
-      {/* The mottos */}
+      {/* The mottos. Beside "Christ above all": every hand raised, the cross above them all. */}
       <section className="grid bg-wine text-paper md:grid-cols-2">
-        <Shot image={ethos["red-crucifix"]} crop="aspect-[4/5] md:aspect-auto md:h-full" className="md:h-full" />
+        <div className="relative md:h-full">
+          <Shot image={events["hands-up"]} crop="aspect-[4/5] md:aspect-auto md:h-full md:min-h-[36rem]" className="md:h-full" />
+          {/* Wash the photo's edge into the wine panel: down on phones, across from md up */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent to-wine md:bg-linear-to-r md:via-transparent md:to-wine/90"
+          />
+          <p className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.3em] text-paper/80 md:bottom-8 md:left-8">
+            Every hand raised. The cross above them all.
+          </p>
+        </div>
         <div className="reveal flex flex-col justify-center px-5 py-16 md:px-16 md:py-24">
           <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-goldenrod">— What we stand on</p>
           <ul className="mt-10 flex flex-col gap-10">

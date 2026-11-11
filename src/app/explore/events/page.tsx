@@ -44,7 +44,7 @@ const room = [
   events.praising,
   events["at-the-decks"],
   events["the-set"],
-  events["hands-up"],
+  // hands-up stands beside "Christ above all" on the Ethos page instead
   events["baroque-decks"],
   events["the-booth"],
   events["crowd-of-light"],
