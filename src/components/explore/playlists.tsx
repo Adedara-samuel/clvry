@@ -33,10 +33,13 @@ export function Playlists({ className }: { className?: string }) {
               <span aria-hidden className="flex size-11 shrink-0 items-center justify-center bg-wine text-goldenrod">
                 <AudioLinesIcon className="size-4" strokeWidth={1.5} />
               </span>
-              <div>
+              <div className="flex-1">
                 <p className="font-display text-sm uppercase tracking-[0.1em]">{p.title}</p>
                 <p className="mt-0.5 text-xs text-muted-foreground">{p.note}</p>
               </div>
+              {platforms.some((platform) => !p.links[platform]) && (
+                <span className="shrink-0 font-mono text-[9px] uppercase tracking-[0.25em] text-gold">Coming soon</span>
+              )}
             </div>
             <div className="flex flex-wrap gap-2 pl-15">
               {platforms.map((platform) => {
@@ -57,11 +60,12 @@ export function Playlists({ className }: { className?: string }) {
                   <span
                     key={platform}
                     aria-disabled="true"
+                    title={`Coming soon on ${platform}`}
                     className={cn(pill, "border-dashed border-border text-muted-foreground")}
                   >
                     <PlatformIcon platform={platform} className="size-3.5 opacity-60" />
                     {platform}
-                    <span className="text-gold">· Coming soon</span>
+                    <span className="sr-only">: coming soon</span>
                   </span>
                 );
               })}
