@@ -15,21 +15,21 @@ export const metadata: Metadata = {
 const formats = [
   {
     n: "01",
-    name: "Sound",
+    name: "Music",
     title: "Worship on the decks",
     body: "Godly music with a street sound, loud enough to feel in your chest. Praise that doesn't ask you to sit still.",
     images: [events.elevation, events["dj-temry"]],
   },
   {
     n: "02",
-    name: "Gallery",
+    name: "Art",
     title: "Faith on the walls",
     body: "Art nights in bright rooms: prints, paint still wet, and the garment on show before anyone else sees it.",
     images: [events["bright-gallery"], events["painting-night"]],
   },
   {
     n: "03",
-    name: "Circle",
+    name: "Creative",
     title: "Vision-board days",
     body: "Polaroids, scissors, candles and prayer. Making plans with God in the room, and friends either side of you.",
     images: [events["vision-board-day"], events["vision-board"]],
@@ -67,7 +67,7 @@ export default function EventsPage() {
       {/* Statement */}
       <section className="px-5 py-20 md:px-12 md:py-32">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— The gathering</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-gold">— The ecclesiastical</p>
           <p className="reveal mt-8 max-w-4xl font-display text-3xl uppercase leading-tight md:text-6xl">
             Church doesn&apos;t end <span className="text-gold">at the door.</span>
           </p>
