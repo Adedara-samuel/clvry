@@ -1,4 +1,5 @@
 import { emailMark, emailWordmark } from "./assets";
+import { SIGNUP_SUBJECT } from "./subjects";
 
 // Email HTML: tables + inline styles only — that's what Gmail, Outlook and Apple Mail all render.
 const c = {
@@ -33,12 +34,16 @@ export type NewSubscriber = {
   submittedAt: Date;
   /** Page the form was submitted from, if known. */
   pageUrl?: string;
+  /** Where the sign-up came from; defaults to the website form. */
+  source?: string;
 };
+
+const DEFAULT_SOURCE = "CLVRY website · Newsletter sign-up form";
 
 const CID_WORDMARK = "clvry-wordmark";
 const CID_MARK = "clvry-mark";
 
-export function newSubscriberEmail({ email, phone, submittedAt, pageUrl }: NewSubscriber) {
+export function newSubscriberEmail({ email, phone, submittedAt, pageUrl, source = DEFAULT_SOURCE }: NewSubscriber) {
   const when = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "full",
     timeStyle: "short",
@@ -55,7 +60,7 @@ export function newSubscriberEmail({ email, phone, submittedAt, pageUrl }: NewSu
     const tel = `tel:${phone.replace(/[^\d+]/g, "")}`;
     rows.push(["Phone", `<a href="${escapeHtml(tel)}" style="color:${c.wine};text-decoration:none;font-weight:600;">${escapeHtml(phone)}</a>`]);
   }
-  rows.push(["Signed up", `${escapeHtml(when)} UTC`], ["Source", "CLVRY website &middot; Newsletter sign-up form"]);
+  rows.push(["Signed up", `${escapeHtml(when)} UTC`], ["Source", escapeHtml(source)]);
   if (pageUrl) rows.push(["Page", escapeHtml(pageUrl)]);
 
   const detailRows = rows
@@ -202,7 +207,7 @@ export function newSubscriberEmail({ email, phone, submittedAt, pageUrl }: NewSu
     `Email: ${email}`,
     ...(phone ? [`Phone: ${phone}`] : []),
     `Signed up: ${when} UTC`,
-    "Source: CLVRY website · Newsletter sign-up form",
+    `Source: ${source}`,
     ...(pageUrl ? [`Page: ${pageUrl}`] : []),
     "",
     "Reply to this email to write to the subscriber directly.",
@@ -212,7 +217,7 @@ export function newSubscriberEmail({ email, phone, submittedAt, pageUrl }: NewSu
   ].join("\n");
 
   return {
-    subject: `[CLVRY Website] New newsletter sign-up: ${email}`,
+    subject: `${SIGNUP_SUBJECT}${email}`,
     html,
     text,
     replyTo: email,
