@@ -37,6 +37,11 @@ export function throttle(bucket: Map<string, number[]>, key: string, max: number
   return recent.length > max;
 }
 
+/** The public site address used in email links: SITE_URL if set, otherwise wherever the admin is open. */
+export function siteUrlFor(request: Request) {
+  return (process.env.SITE_URL || new URL(request.url).origin).replace(/\/$/, "");
+}
+
 export function clientIp(request: Request) {
   return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
 }
