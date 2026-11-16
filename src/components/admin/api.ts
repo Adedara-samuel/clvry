@@ -19,6 +19,8 @@ export async function api<T = { ok: true }>(url: string, init?: { method?: strin
   });
   const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
   if (res.status === 401) {
+    // Session expired: a full load to the login, which brings them back here afterwards.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
     window.location.assign(`/admin/login?next=${encodeURIComponent(window.location.pathname)}`);
   }
   if (!res.ok || data.ok === false) throw new Error(data.error ?? `Request failed (${res.status})`);

@@ -29,6 +29,8 @@ const nav = [
 
 async function signOut() {
   await api("/api/admin/logout", { method: "POST", body: {} }).catch(() => {});
+  // A full page load on purpose: it drops every cached admin query along with the session.
+  // eslint-disable-next-line @next/next/no-location-assign-relative-destination
   window.location.assign("/admin/login");
 }
 
@@ -101,9 +103,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
       <main className="min-w-0 flex-1 px-5 py-8 md:px-10 md:py-10">
         <div className="mx-auto max-w-6xl">{children}</div>
         <div className="mt-12 flex gap-6 border-t border-border pt-4 md:hidden">
-          <a href="/" className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <Link href="/" className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             View site
-          </a>
+          </Link>
           <button type="button" onClick={signOut} className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             Sign out
           </button>
