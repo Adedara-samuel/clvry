@@ -70,7 +70,8 @@ export async function readContent<K extends ContentKey>(key: K): Promise<Content
     const cfg = github()!;
     text = await gh<string>(`/contents/${file.path}?ref=${encodeURIComponent(cfg.branch)}`, { raw: true });
   } else {
-    text = await fs.readFile(path.join(process.cwd(), file.path), "utf8");
+    // Statically scoped to src/content so the build only traces that folder.
+    text = await fs.readFile(path.join(process.cwd(), "src", "content", path.basename(file.path)), "utf8");
   }
   return file.schema.parse(JSON.parse(text)) as ContentOf<K>;
 }
@@ -93,7 +94,8 @@ export async function commitChanges(changes: FileChange[], message: string) {
 
   if (mode === "local") {
     for (const change of changes) {
-      const target = path.join(process.cwd(), change.path);
+      // Dev-only write (mode "local" never happens in production), so keep it out of output tracing.
+      const target = path.join(/*turbopackIgnore: true*/ process.cwd(), change.path);
       if ("delete" in change) await fs.rm(target, { force: true });
       else {
         await fs.mkdir(path.dirname(target), { recursive: true });
