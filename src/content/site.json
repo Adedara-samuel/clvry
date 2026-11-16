@@ -1,0 +1,42 @@
+{
+  "popup": {
+    "enabled": true,
+    "delaySeconds": 5.5,
+    "exploreRepeatMinutes": 2,
+    "title": "Become a member",
+    "description": "Many exciting things to come. Be the first to know.",
+    "perks": [
+      "Early access to every drop",
+      "First word on sales",
+      "Members-only collections and merch"
+    ]
+  },
+  "ticker": [
+    {
+      "ref": "Luke 23:32",
+      "text": "There were also two others, criminals, led with Him to be put to death."
+    },
+    {
+      "ref": "Galatians 6:14",
+      "text": "But God forbid that I should boast except in the cross of our Lord Jesus Christ, by whom the world has been crucified to me, and I to the world."
+    },
+    {
+      "ref": "Hebrews 12:2",
+      "text": "Looking unto Jesus, the author and finisher of our faith, who for the joy that was set before Him endured the cross, despising the shame, and has sat down at the right hand of the throne of God."
+    }
+  ],
+  "socials": [
+    {
+      "name": "Instagram",
+      "handle": "@clvrywrld",
+      "href": "https://www.instagram.com/clvrywrld",
+      "visible": true
+    },
+    {
+      "name": "X",
+      "handle": "@clvrywrld",
+      "href": "https://x.com/clvrywrld",
+      "visible": true
+    }
+  ]
+}

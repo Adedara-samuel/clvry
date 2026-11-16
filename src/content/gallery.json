@@ -1,0 +1,1036 @@
+{
+  "ethos": [
+    {
+      "slug": "sanctuary",
+      "src": "/explore/ethos/sanctuary.webp",
+      "width": 736,
+      "height": 827,
+      "alt": "A lone figure walking the aisle of a white chapel toward the cross"
+    },
+    {
+      "slug": "jesus-saves",
+      "src": "/explore/ethos/jesus-saves.webp",
+      "width": 736,
+      "height": 742,
+      "alt": "A 'Jesus Saves' cross sign over a city block"
+    },
+    {
+      "slug": "three-angels",
+      "src": "/explore/ethos/three-angels.webp",
+      "width": 640,
+      "height": 640,
+      "alt": "Engraving of three angels bearing shields marked with the cross"
+    },
+    {
+      "slug": "glass-cross",
+      "src": "/explore/ethos/glass-cross.webp",
+      "width": 736,
+      "height": 915,
+      "alt": "A stained-glass cross with Christ in glory"
+    },
+    {
+      "slug": "hill-crucifix",
+      "src": "/explore/ethos/hill-crucifix.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "Oil painting of the crucifixion on a hill"
+    },
+    {
+      "slug": "carrying-the-cross",
+      "src": "/explore/ethos/carrying-the-cross.webp",
+      "width": 600,
+      "height": 888,
+      "alt": "Christ, crowned with thorns, carrying the cross"
+    },
+    {
+      "slug": "crown-of-thorns",
+      "src": "/explore/ethos/crown-of-thorns.webp",
+      "width": 600,
+      "height": 600,
+      "alt": "A crown of thorns embroidered on linen"
+    },
+    {
+      "slug": "seal",
+      "src": "/explore/ethos/seal.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "Engraved seal of the Lamb, the dove and the hand of blessing"
+    },
+    {
+      "slug": "communion",
+      "src": "/explore/ethos/communion.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "Christ lifting the bread at the Last Supper by candlelight"
+    },
+    {
+      "slug": "jesus-is-king",
+      "src": "/explore/ethos/jesus-is-king.webp",
+      "width": 736,
+      "height": 795,
+      "alt": "A 'Jesus is King' flag raised over the city"
+    },
+    {
+      "slug": "holy-bible",
+      "src": "/explore/ethos/holy-bible.webp",
+      "width": 736,
+      "height": 977,
+      "alt": "A Holy Bible resting on linen"
+    },
+    {
+      "slug": "rosary",
+      "src": "/explore/ethos/rosary.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A gold crucifix laid on an open Bible"
+    },
+    {
+      "slug": "sin-no-more",
+      "src": "/explore/ethos/sin-no-more.webp",
+      "width": 1125,
+      "height": 1125,
+      "alt": "Christ before a crowd beneath the words 'Go and sin no more'"
+    },
+    {
+      "slug": "red-crucifix",
+      "src": "/explore/ethos/red-crucifix.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "A crucifix silhouetted against deep red"
+    },
+    {
+      "slug": "heaven",
+      "src": "/explore/ethos/heaven.webp",
+      "width": 1400,
+      "height": 1168,
+      "alt": "A street sign reading 'Heaven' against the night sky"
+    },
+    {
+      "slug": "jesus-is-alive",
+      "src": "/explore/ethos/jesus-is-alive.webp",
+      "width": 788,
+      "height": 1400,
+      "alt": "A poster reading 'Jesus is Alive'"
+    },
+    {
+      "slug": "last-supper",
+      "src": "/explore/ethos/last-supper.webp",
+      "width": 735,
+      "height": 490,
+      "alt": "Painting of the Last Supper"
+    },
+    {
+      "slug": "crucifixion",
+      "src": "/explore/ethos/crucifixion.webp",
+      "width": 735,
+      "height": 1048,
+      "alt": "Léon Bonnat, The Crucifixion (1874)"
+    },
+    {
+      "slug": "screen-cross",
+      "src": "/explore/ethos/screen-cross.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A cross built from screens showing the Passion"
+    },
+    {
+      "slug": "stat-crux-engraving",
+      "src": "/explore/ethos/stat-crux-engraving.webp",
+      "width": 318,
+      "height": 347,
+      "alt": "Engraved orb and cross: 'Stat crux dum volvitur orbis'"
+    },
+    {
+      "slug": "open-hand",
+      "src": "/explore/ethos/open-hand.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "Christ reaching out an open hand, drawn in ink"
+    },
+    {
+      "slug": "trumpets",
+      "src": "/explore/ethos/trumpets.webp",
+      "width": 676,
+      "height": 1200,
+      "alt": "Gilded angels with trumpets atop columns against blue sky"
+    },
+    {
+      "slug": "bible-and-rosary",
+      "src": "/explore/ethos/bible-and-rosary.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A black Holy Bible with a rosary across it"
+    },
+    {
+      "slug": "x-ray",
+      "src": "/explore/ethos/x-ray.webp",
+      "width": 735,
+      "height": 936,
+      "alt": "An X-ray of a ribcage with a cross over the heart"
+    },
+    {
+      "slug": "pomegranate",
+      "src": "/explore/ethos/pomegranate.webp",
+      "width": 736,
+      "height": 966,
+      "alt": "A silver crucifix above a split pomegranate"
+    },
+    {
+      "slug": "crusader",
+      "src": "/explore/ethos/crusader.webp",
+      "width": 652,
+      "height": 960,
+      "alt": "Godfrey de Bouillon on horseback beneath the Jerusalem cross"
+    },
+    {
+      "slug": "sketch",
+      "src": "/explore/ethos/sketch.webp",
+      "width": 640,
+      "height": 640,
+      "alt": "A grainy sketch of Christ, head in hand"
+    },
+    {
+      "slug": "stone-cross",
+      "src": "/explore/ethos/stone-cross.webp",
+      "width": 992,
+      "height": 1332,
+      "alt": "A cross carved into weathered stone"
+    },
+    {
+      "slug": "the-storm",
+      "src": "/explore/ethos/the-storm.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "A boat in a storm, seen from above"
+    },
+    {
+      "slug": "stat-crux",
+      "src": "/explore/ethos/stat-crux.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "Gold seal: 'Stat crux dum volvitur orbis'"
+    },
+    {
+      "slug": "praying-hands",
+      "src": "/explore/ethos/praying-hands.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "Hands folded in prayer around a rosary"
+    },
+    {
+      "slug": "starlight",
+      "src": "/explore/ethos/starlight.webp",
+      "width": 638,
+      "height": 900,
+      "alt": "Christ drawn in starlight"
+    },
+    {
+      "slug": "rear-view",
+      "src": "/explore/ethos/rear-view.webp",
+      "width": 1127,
+      "height": 1400,
+      "alt": "A rosary hanging from a rear-view mirror"
+    },
+    {
+      "slug": "cherubs",
+      "src": "/explore/ethos/cherubs.webp",
+      "width": 933,
+      "height": 1400,
+      "alt": "Cherubs holding a rosary, drawn in silver"
+    },
+    {
+      "slug": "redeemer",
+      "src": "/explore/ethos/redeemer.webp",
+      "width": 736,
+      "height": 975,
+      "alt": "Christ the Redeemer against a full moon"
+    },
+    {
+      "slug": "neon-crucifix",
+      "src": "/explore/ethos/neon-crucifix.webp",
+      "width": 1170,
+      "height": 1395,
+      "alt": "A crucifix in neon pink and blue: 'Not my will, but Thine be done'"
+    },
+    {
+      "slug": "knight-angel",
+      "src": "/explore/ethos/knight-angel.webp",
+      "width": 928,
+      "height": 1232,
+      "alt": "An armoured angel holding a cross of light"
+    },
+    {
+      "slug": "aqueduct",
+      "src": "/explore/ethos/aqueduct.webp",
+      "width": 1055,
+      "height": 1400,
+      "alt": "An aqueduct running through clouds and forest"
+    },
+    {
+      "slug": "drowning",
+      "src": "/explore/ethos/drowning.webp",
+      "width": 1151,
+      "height": 1150,
+      "alt": "Icon of Christ reaching Peter on the waves"
+    },
+    {
+      "slug": "heaven-colonnade",
+      "src": "/explore/ethos/heaven-colonnade.webp",
+      "width": 785,
+      "height": 1400,
+      "alt": "A marble colonnade among the clouds"
+    },
+    {
+      "slug": "hand-of-light",
+      "src": "/explore/ethos/hand-of-light.webp",
+      "width": 632,
+      "height": 1400,
+      "alt": "An open hand beneath a small cross of light"
+    },
+    {
+      "slug": "it-is-written",
+      "src": "/explore/ethos/it-is-written.webp",
+      "width": 736,
+      "height": 1096,
+      "alt": "Luke 1:37 highlighted: 'For with God nothing shall be impossible'"
+    },
+    {
+      "slug": "on-the-water",
+      "src": "/explore/ethos/on-the-water.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "Christ walking on water, drawn in blue"
+    },
+    {
+      "slug": "the-procession",
+      "src": "/explore/ethos/the-procession.webp",
+      "width": 900,
+      "height": 900,
+      "alt": "Illustration of a procession toward the cross"
+    },
+    {
+      "slug": "the-lake",
+      "src": "/explore/ethos/the-lake.webp",
+      "width": 900,
+      "height": 621,
+      "alt": "Illustration of Christ above a moonlit lake"
+    },
+    {
+      "slug": "three-crosses",
+      "src": "/explore/ethos/three-crosses.webp",
+      "width": 900,
+      "height": 720,
+      "alt": "Illustration of three crosses on a hill"
+    },
+    {
+      "slug": "holy-holy-holy",
+      "src": "/explore/ethos/holy-holy-holy.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "A seraph crest: 'Holy, holy, holy'"
+    },
+    {
+      "slug": "john-3-16",
+      "src": "/explore/ethos/john-3-16.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "A crucifix above the earth: John 3:16"
+    },
+    {
+      "slug": "colonnade",
+      "src": "/explore/ethos/colonnade.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "A long arched colonnade"
+    },
+    {
+      "slug": "rodeo-cross",
+      "src": "/explore/ethos/rodeo-cross.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "Graphic: a rider and cross in blue"
+    },
+    {
+      "slug": "barcode-poster",
+      "src": "/explore/ethos/barcode-poster.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "A halftone poster of Christ with a barcode"
+    },
+    {
+      "slug": "heals-the-broken",
+      "src": "/explore/ethos/heals-the-broken.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A placard in a crowd: 'Jesus heals the broken'"
+    },
+    {
+      "slug": "one-way",
+      "src": "/explore/ethos/one-way.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "A 'One Way' sign beside a lit cross at night"
+    },
+    {
+      "slug": "dove",
+      "src": "/explore/ethos/dove.webp",
+      "width": 640,
+      "height": 689,
+      "alt": "A carved dove bearing a halo against deep wine"
+    },
+    {
+      "slug": "enthroned",
+      "src": "/explore/ethos/enthroned.webp",
+      "width": 479,
+      "height": 640,
+      "alt": "Christ enthroned among the four living creatures"
+    }
+  ],
+  "cathedrals": [
+    {
+      "slug": "bell-tower",
+      "src": "/explore/cathedrals/bell-tower.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A baroque bell tower in black and white"
+    },
+    {
+      "slug": "a-frame",
+      "src": "/explore/cathedrals/a-frame.webp",
+      "width": 736,
+      "height": 1035,
+      "alt": "A modernist A-frame church crowned with a tall cross"
+    },
+    {
+      "slug": "gilded-dome",
+      "src": "/explore/cathedrals/gilded-dome.webp",
+      "width": 676,
+      "height": 1200,
+      "alt": "Gilded arches and a chandelier beneath a painted dome"
+    },
+    {
+      "slug": "gothic-nave",
+      "src": "/explore/cathedrals/gothic-nave.webp",
+      "width": 682,
+      "height": 1024,
+      "alt": "The long Gothic nave of a cathedral"
+    },
+    {
+      "slug": "painted-cupola",
+      "src": "/explore/cathedrals/painted-cupola.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "A painted cupola seen from directly below"
+    },
+    {
+      "slug": "notre-dame-altar",
+      "src": "/explore/cathedrals/notre-dame-altar.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "The altar of Notre-Dame de Paris beneath a gold cross"
+    },
+    {
+      "slug": "light-in-the-pews",
+      "src": "/explore/cathedrals/light-in-the-pews.webp",
+      "width": 736,
+      "height": 1253,
+      "alt": "Light falling through stained glass across the pews"
+    },
+    {
+      "slug": "iconostasis",
+      "src": "/explore/cathedrals/iconostasis.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A carved Orthodox iconostasis"
+    },
+    {
+      "slug": "white-sanctuary",
+      "src": "/explore/cathedrals/white-sanctuary.webp",
+      "width": 712,
+      "height": 1400,
+      "alt": "A white modern sanctuary ribbed with stained glass"
+    },
+    {
+      "slug": "ecce-homo",
+      "src": "/explore/cathedrals/ecce-homo.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "The Cathedral of Santo Ecce Homo, Valledupar, lit at dusk"
+    }
+  ],
+  "paintings": [
+    {
+      "slug": "hand-and-crucifix",
+      "src": "/explore/paintings/hand-and-crucifix.webp",
+      "width": 736,
+      "height": 730,
+      "alt": "Detail of a painted hand holding a gold crucifix"
+    },
+    {
+      "slug": "crown-detail",
+      "src": "/explore/paintings/crown-detail.webp",
+      "width": 719,
+      "height": 719,
+      "alt": "Detail of Christ's eyes beneath the crown of thorns"
+    },
+    {
+      "slug": "creation",
+      "src": "/explore/paintings/creation.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "The Creation of Adam, rendered in gold leaf"
+    },
+    {
+      "slug": "risen",
+      "src": "/explore/paintings/risen.webp",
+      "width": 663,
+      "height": 830,
+      "alt": "The risen Christ among the saints"
+    },
+    {
+      "slug": "ascension-glass",
+      "src": "/explore/paintings/ascension-glass.webp",
+      "width": 651,
+      "height": 1400,
+      "alt": "The Ascension in stained glass"
+    },
+    {
+      "slug": "golgotha",
+      "src": "/explore/paintings/golgotha.webp",
+      "width": 736,
+      "height": 872,
+      "alt": "Golgotha at night, the crowd gathered beneath the crosses"
+    },
+    {
+      "slug": "ascension",
+      "src": "/explore/paintings/ascension.webp",
+      "width": 675,
+      "height": 1200,
+      "alt": "Christ ascending through the clouds"
+    },
+    {
+      "slug": "rosary-hands",
+      "src": "/explore/paintings/rosary-hands.webp",
+      "width": 675,
+      "height": 1200,
+      "alt": "A rosary falling from one hand to another"
+    },
+    {
+      "slug": "ecce-homo-ciseri",
+      "src": "/explore/paintings/ecce-homo-ciseri.webp",
+      "width": 736,
+      "height": 920,
+      "alt": "Antonio Ciseri, Ecce Homo (c. 1871)"
+    },
+    {
+      "slug": "daniel",
+      "src": "/explore/paintings/daniel.webp",
+      "width": 735,
+      "height": 919,
+      "alt": "Briton Rivière, Daniel in the Lions' Den"
+    },
+    {
+      "slug": "the-bread",
+      "src": "/explore/paintings/the-bread.webp",
+      "width": 592,
+      "height": 800,
+      "alt": "Christ raising the bread at the Last Supper"
+    },
+    {
+      "slug": "last-sigh",
+      "src": "/explore/paintings/last-sigh.webp",
+      "width": 735,
+      "height": 584,
+      "alt": "Julien-Michel Gué, The Last Sigh of Christ"
+    },
+    {
+      "slug": "last-supper-panorama",
+      "src": "/explore/paintings/last-supper-panorama.webp",
+      "width": 1400,
+      "height": 661,
+      "alt": "The Last Supper"
+    },
+    {
+      "slug": "ceiling",
+      "src": "/explore/paintings/ceiling.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "A painted church ceiling, sky opening at its centre"
+    }
+  ],
+  "street": [
+    {
+      "slug": "trust-god-bro",
+      "src": "/explore/street/trust-god-bro.webp",
+      "width": 736,
+      "height": 897,
+      "alt": "A Times Square billboard reading 'Trust God Bro'"
+    },
+    {
+      "slug": "jesus-is-king-billboard",
+      "src": "/explore/street/jesus-is-king-billboard.webp",
+      "width": 640,
+      "height": 853,
+      "alt": "A 'Jesus is King' billboard over a city street"
+    },
+    {
+      "slug": "blue-towers",
+      "src": "/explore/street/blue-towers.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "Towers in blue over a busy avenue"
+    },
+    {
+      "slug": "from-above",
+      "src": "/explore/street/from-above.webp",
+      "width": 735,
+      "height": 1103,
+      "alt": "A city street seen from above"
+    },
+    {
+      "slug": "paris-crossing",
+      "src": "/explore/street/paris-crossing.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A Paris crossing beside a stone facade"
+    },
+    {
+      "slug": "regent-street",
+      "src": "/explore/street/regent-street.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "Regent Street, London, under cloud"
+    },
+    {
+      "slug": "wet-crossing",
+      "src": "/explore/street/wet-crossing.webp",
+      "width": 675,
+      "height": 1200,
+      "alt": "A wet zebra crossing between stone buildings"
+    },
+    {
+      "slug": "jesus-saves-wall",
+      "src": "/explore/street/jesus-saves-wall.webp",
+      "width": 389,
+      "height": 600,
+      "alt": "A 'Jesus Saves' cross on a city wall, a mother and child passing"
+    },
+    {
+      "slug": "ezra",
+      "src": "/explore/street/ezra.webp",
+      "width": 735,
+      "height": 919,
+      "alt": "A Times Square billboard: 'Be of good courage, and do it' (Ezra 10:4)"
+    },
+    {
+      "slug": "corner",
+      "src": "/explore/street/corner.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A quiet city corner at a crossing"
+    },
+    {
+      "slug": "yellow-car",
+      "src": "/explore/street/yellow-car.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "A couple beside a yellow car in an open field"
+    }
+  ],
+  "garment": [
+    {
+      "slug": "heavyweights",
+      "src": "/explore/garment/heavyweights.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "Heavyweight tees folded in wine, clay, green and cream"
+    },
+    {
+      "slug": "colour-rail",
+      "src": "/explore/garment/colour-rail.webp",
+      "width": 736,
+      "height": 1307,
+      "alt": "A rail of tees in graded colour"
+    },
+    {
+      "slug": "crewnecks",
+      "src": "/explore/garment/crewnecks.webp",
+      "width": 736,
+      "height": 920,
+      "alt": "Crewneck collars in rust, clay and cream"
+    },
+    {
+      "slug": "raw-hems",
+      "src": "/explore/garment/raw-hems.webp",
+      "width": 736,
+      "height": 966,
+      "alt": "Stacked denim with raw, frayed hems"
+    },
+    {
+      "slug": "coming-soon",
+      "src": "/explore/garment/coming-soon.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "An almost empty rail beneath the words 'coming soon'"
+    },
+    {
+      "slug": "clvry-caps",
+      "src": "/explore/garment/clvry-caps.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Black corduroy CLVRY caps: 'Jesus Saves' and 'Christ Above All'"
+    },
+    {
+      "slug": "darkness-light",
+      "src": "/explore/garment/darkness-light.webp",
+      "width": 1105,
+      "height": 1400,
+      "alt": "A cream tee printed 'His love saved us from darkness and brought us into light'"
+    },
+    {
+      "slug": "overshirts",
+      "src": "/explore/garment/overshirts.webp",
+      "width": 736,
+      "height": 1309,
+      "alt": "Overshirts hanging in sage, black and tan"
+    },
+    {
+      "slug": "denim-wall",
+      "src": "/explore/garment/denim-wall.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "A wall of folded denim in every wash"
+    },
+    {
+      "slug": "sleeveless",
+      "src": "/explore/garment/sleeveless.webp",
+      "width": 736,
+      "height": 920,
+      "alt": "Sleeveless tops hanging on a wire"
+    },
+    {
+      "slug": "thorn-beanies",
+      "src": "/explore/garment/thorn-beanies.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Reversible crown-of-thorns beanies"
+    },
+    {
+      "slug": "rolled-denim",
+      "src": "/explore/garment/rolled-denim.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "Rolled denim seen from above"
+    },
+    {
+      "slug": "the-way-cap",
+      "src": "/explore/garment/the-way-cap.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A cap embroidered 'Jesus: the way, the truth, the life'"
+    },
+    {
+      "slug": "faith-jacket",
+      "src": "/explore/garment/faith-jacket.webp",
+      "width": 735,
+      "height": 936,
+      "alt": "Washed leather jacket, crucifix and a 'Faith' chain belt"
+    },
+    {
+      "slug": "the-way-car",
+      "src": "/explore/garment/the-way-car.webp",
+      "width": 736,
+      "height": 1041,
+      "alt": "A purple car under the words 'Jesus is the way'"
+    },
+    {
+      "slug": "together-in-faith",
+      "src": "/explore/garment/together-in-faith.webp",
+      "width": 736,
+      "height": 920,
+      "alt": "Graphic: 'Together in Faith'"
+    },
+    {
+      "slug": "polo-olive",
+      "src": "/explore/garment/polo-olive.webp",
+      "width": 1131,
+      "height": 1391,
+      "alt": "Clvry script polo in olive with the winged-cross crest"
+    },
+    {
+      "slug": "tree-tee-black",
+      "src": "/explore/garment/tree-tee-black.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Black tee with a teal Tree of Life graphic, John 15:5 on the back"
+    },
+    {
+      "slug": "crucifix-vest",
+      "src": "/explore/garment/crucifix-vest.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Burgundy knit vest with a winged crucifix and an all-over cross pattern"
+    },
+    {
+      "slug": "polo-navy",
+      "src": "/explore/garment/polo-navy.webp",
+      "width": 1131,
+      "height": 1391,
+      "alt": "Clvry script polo in navy with the winged-cross crest"
+    },
+    {
+      "slug": "cross-trucker-black",
+      "src": "/explore/garment/cross-trucker-black.webp",
+      "width": 1400,
+      "height": 1120,
+      "alt": "Black trucker cap embroidered 'Saved by the Cross, CLVRY Studios'"
+    },
+    {
+      "slug": "cross-trucker-burgundy",
+      "src": "/explore/garment/cross-trucker-burgundy.webp",
+      "width": 1120,
+      "height": 1400,
+      "alt": "Burgundy 'Saved by the Cross' trucker caps piled in a box"
+    },
+    {
+      "slug": "wide-denim",
+      "src": "/explore/garment/wide-denim.webp",
+      "width": 1050,
+      "height": 1400,
+      "alt": "Wide raw denim with red cross pockets and 'Jesus Saves' cuffs"
+    },
+    {
+      "slug": "call-on-jesus",
+      "src": "/explore/garment/call-on-jesus.webp",
+      "width": 933,
+      "height": 1400,
+      "alt": "Pale blue ringer tee printed 'Call on Jesus'"
+    },
+    {
+      "slug": "focus-on-jesus",
+      "src": "/explore/garment/focus-on-jesus.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Pink ringer tee printed 'Focus on Jesus'"
+    },
+    {
+      "slug": "only-jesus-saves-charcoal",
+      "src": "/explore/garment/only-jesus-saves-charcoal.webp",
+      "width": 1144,
+      "height": 1375,
+      "alt": "Washed charcoal tee printed 'Only Jesus Saves'"
+    },
+    {
+      "slug": "only-jesus-saves-rose",
+      "src": "/explore/garment/only-jesus-saves-rose.webp",
+      "width": 1254,
+      "height": 1254,
+      "alt": "Washed rose tee printed 'Only Jesus Saves'"
+    },
+    {
+      "slug": "jorts",
+      "src": "/explore/garment/jorts.webp",
+      "width": 1400,
+      "height": 1114,
+      "alt": "Denim jorts with red cross pockets and 'Jesus Saves' cuffs"
+    },
+    {
+      "slug": "follow-christ",
+      "src": "/explore/garment/follow-christ.webp",
+      "width": 1215,
+      "height": 1295,
+      "alt": "Black tee: a marble statue with 'Follow Christ' in dripping paint"
+    },
+    {
+      "slug": "piped-tee-navy",
+      "src": "/explore/garment/piped-tee-navy.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Navy tee with gold piping and the winged-cross crest"
+    },
+    {
+      "slug": "tree-tee-bone",
+      "src": "/explore/garment/tree-tee-bone.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Bone tee with a burgundy Tree of Life, John 15:5 on the back"
+    },
+    {
+      "slug": "blood-of-jesus",
+      "src": "/explore/garment/blood-of-jesus.webp",
+      "width": 1254,
+      "height": 1254,
+      "alt": "Black tee printed 'Blood of Jesus' with a shouting boy"
+    },
+    {
+      "slug": "crew-socks",
+      "src": "/explore/garment/crew-socks.webp",
+      "width": 1086,
+      "height": 532,
+      "alt": "White CLVRY crew socks with red crosses"
+    },
+    {
+      "slug": "christ-above-all-raglan",
+      "src": "/explore/garment/christ-above-all-raglan.webp",
+      "width": 1400,
+      "height": 933,
+      "alt": "Cream and burgundy raglan tee printed 'Christ above all'"
+    }
+  ],
+  "events": [
+    {
+      "slug": "speaker-cross",
+      "src": "/explore/events/speaker-cross.webp",
+      "width": 676,
+      "height": 549,
+      "alt": "Kneeling in prayer beneath a cross built from speakers"
+    },
+    {
+      "slug": "the-booth",
+      "src": "/explore/events/the-booth.webp",
+      "width": 473,
+      "height": 701,
+      "alt": "Hands raised around a DJ booth"
+    },
+    {
+      "slug": "gallery-night",
+      "src": "/explore/events/gallery-night.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A gallery night in a raw concrete space"
+    },
+    {
+      "slug": "at-the-decks",
+      "src": "/explore/events/at-the-decks.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "Christ at the decks before a crowd"
+    },
+    {
+      "slug": "jesus-raves",
+      "src": "/explore/events/jesus-raves.webp",
+      "width": 736,
+      "height": 1041,
+      "alt": "A poster reading 'Jesus Raves'"
+    },
+    {
+      "slug": "vision-board",
+      "src": "/explore/events/vision-board.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "A vision-board night: magazines and collage across the floor"
+    },
+    {
+      "slug": "red-room",
+      "src": "/explore/events/red-room.webp",
+      "width": 236,
+      "height": 295,
+      "alt": "A white gallery hung with bold red canvases"
+    },
+    {
+      "slug": "crowd-of-light",
+      "src": "/explore/events/crowd-of-light.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "A crowd beneath columns of coloured light and a cross"
+    },
+    {
+      "slug": "hands-up",
+      "src": "/explore/events/hands-up.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "Hands raised to a lit cross at a concert"
+    },
+    {
+      "slug": "dj-hands",
+      "src": "/explore/events/dj-hands.webp",
+      "width": 736,
+      "height": 1265,
+      "alt": "Hands on the decks over a city skyline"
+    },
+    {
+      "slug": "red-cathedral",
+      "src": "/explore/events/red-cathedral.webp",
+      "width": 736,
+      "height": 920,
+      "alt": "A rave in a cathedral washed in red"
+    },
+    {
+      "slug": "the-set",
+      "src": "/explore/events/the-set.webp",
+      "width": 735,
+      "height": 891,
+      "alt": "Hands arranging a miniature photo set: sofa, lights and crew"
+    },
+    {
+      "slug": "neon-crosses",
+      "src": "/explore/events/neon-crosses.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A crowd beneath red neon crosses"
+    },
+    {
+      "slug": "bright-gallery",
+      "src": "/explore/events/bright-gallery.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "Posters hung on free-standing frames in a bright gallery"
+    },
+    {
+      "slug": "the-studio",
+      "src": "/explore/events/the-studio.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "An artist's studio, canvases stacked along the walls"
+    },
+    {
+      "slug": "painting-night",
+      "src": "/explore/events/painting-night.webp",
+      "width": 736,
+      "height": 1104,
+      "alt": "Silhouettes painting a large canvas under studio lights"
+    },
+    {
+      "slug": "baroque-decks",
+      "src": "/explore/events/baroque-decks.webp",
+      "width": 736,
+      "height": 736,
+      "alt": "Christ at the decks among cherubs, painted in a baroque style"
+    },
+    {
+      "slug": "dj-temry",
+      "src": "/explore/events/dj-temry.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "DJ Temry on set, the crowd pressed close"
+    },
+    {
+      "slug": "elevation",
+      "src": "/explore/events/elevation.webp",
+      "width": 736,
+      "height": 1135,
+      "alt": "A worship stage lit in blue with a glowing cross"
+    },
+    {
+      "slug": "hands-to-the-cross",
+      "src": "/explore/events/hands-to-the-cross.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "Hands raised toward a small lit cross"
+    },
+    {
+      "slug": "praising",
+      "src": "/explore/events/praising.webp",
+      "width": 736,
+      "height": 981,
+      "alt": "A blue-lit stage with a cross, the crowd in praise"
+    },
+    {
+      "slug": "vision-board-day",
+      "src": "/explore/events/vision-board-day.webp",
+      "width": 736,
+      "height": 1308,
+      "alt": "Polaroids, candles and cut-outs on a vision-board day"
+    }
+  ]
+}

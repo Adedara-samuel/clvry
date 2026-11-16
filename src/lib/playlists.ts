@@ -1,15 +1,13 @@
-export const platforms = ["Spotify", "Audiomack"] as const;
+import content from "@/content/playlists.json";
+import { playlistPlatforms, type PlaylistsContent } from "./content-schema";
+
+export const platforms = playlistPlatforms;
 export type Platform = (typeof platforms)[number];
 
-export type Playlist = { title: string; note: string; links: Partial<Record<Platform, string>> };
+export type Playlist = PlaylistsContent[number];
 
 /*
- * Playlists shown under Music on /explore/events. Paste a playlist's share URL under `links` when it
- * goes live (e.g. links: { Spotify: "https://open.spotify.com/playlist/…" }); until then that
- * platform's button reads "Coming soon".
+ * Playlists shown under Music on /explore/events, from src/content/playlists.json (edited at
+ * /admin/content). A platform without a link reads "Coming soon".
  */
-export const playlists: Playlist[] = [
-  { title: "Worship on the Decks", note: "Praise with a street sound.", links: {} },
-  { title: "Sunday Morning", note: "Slow and warm, for the drive to church.", links: {} },
-  { title: "Late Night Prayer", note: "Low lights, quiet hearts.", links: {} },
-];
+export const playlists: Playlist[] = content as PlaylistsContent;

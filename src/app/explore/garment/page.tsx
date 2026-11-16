@@ -5,7 +5,8 @@ import { ExploreNext } from "@/components/explore/explore-next";
 import { GarmentIndex, type GarmentLine } from "@/components/explore/garment-index";
 import { ExploreBoard, GalleryHeading } from "@/components/explore/explore-gallery";
 import { Shot } from "@/components/explore/shot";
-import { bannerPool, garment, street } from "@/lib/explore";
+import { bannerPool, garment, street, unplaced } from "@/lib/explore";
+import { allPieces, pieceLabel, pieces } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Garment — CLVRY",
@@ -13,29 +14,8 @@ export const metadata: Metadata = {
     "Cloth carried from the hill. Tees, denim, truckers, knits and polos from CLVRY: the first drop is in the works.",
 };
 
-// Design: CLVRY's own pieces, from the product mockups. Names are working titles.
-const design = [
-  { name: "Christ Above All Raglan", image: garment["christ-above-all-raglan"] },
-  { name: "Script Polo — Olive", image: garment["polo-olive"] },
-  { name: "Saved by the Cross Trucker — Burgundy", image: garment["cross-trucker-burgundy"] },
-  { name: "Crucifix Knit Vest", image: garment["crucifix-vest"] },
-  { name: "Jesus Saves Wide Denim", image: garment["wide-denim"] },
-  { name: "Only Jesus Saves Tee — Charcoal", image: garment["only-jesus-saves-charcoal"] },
-  { name: "Follow Christ Tee", image: garment["follow-christ"] },
-  { name: "Tree of Life Tee — Bone", image: garment["tree-tee-bone"] },
-  { name: "Script Polo — Navy", image: garment["polo-navy"] },
-  { name: "Saved by the Cross Trucker — Black", image: garment["cross-trucker-black"] },
-  { name: "Jesus Saves Jorts", image: garment.jorts },
-  { name: "Only Jesus Saves Tee — Rose", image: garment["only-jesus-saves-rose"] },
-  { name: "Blood of Jesus Tee", image: garment["blood-of-jesus"] },
-  { name: "Tree of Life Tee — Black", image: garment["tree-tee-black"] },
-  { name: "Gold-Piped Tee — Navy", image: garment["piped-tee-navy"] },
-  { name: "Call on Jesus Ringer", image: garment["call-on-jesus"] },
-  { name: "Focus on Jesus Ringer", image: garment["focus-on-jesus"] },
-  { name: "Crew Socks", image: garment["crew-socks"] },
-  { name: "CLVRY Wrld Corduroy Caps", image: garment["clvry-caps"] },
-  { name: "Crown of Thorns Beanie", image: garment["thorn-beanies"] },
-];
+// Design: CLVRY's own pieces, from the product mockups (src/content/products.json, edited at
+// /admin/products).
 
 // Garments: plain cloth only, no graphics. Each family leads with an image that crops well to the
 // 4:5 preview.
@@ -68,6 +48,11 @@ const outside = [
   garment["the-way-cap"],
   garment["together-in-faith"],
 ];
+
+// Garment images added from the admin that aren't a product or placed above join the street board.
+outside.push(
+  ...unplaced(garment, [...outside, ...lines.flatMap((l) => l.images), ...allPieces.map((p) => p.picture)]),
+);
 
 export default function GarmentPage() {
   return (
@@ -123,12 +108,12 @@ export default function GarmentPage() {
           />
         </div>
         <ol className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mt-16 md:gap-6 md:px-12">
-          {design.map((piece, i) => (
-            <li key={piece.image.src} className="group w-[72vw] shrink-0 snap-start md:w-[26vw]">
+          {pieces.map((piece, i) => (
+            <li key={piece.id} className="group w-[72vw] shrink-0 snap-start md:w-[26vw]">
               <div className="relative aspect-[4/5] overflow-hidden bg-[#ece7dd]">
                 <Image
-                  src={piece.image.src}
-                  alt={piece.image.alt}
+                  src={piece.picture.src}
+                  alt={piece.picture.alt}
                   fill
                   sizes="(min-width: 768px) 26vw, 72vw"
                   className="object-contain p-3 mix-blend-multiply transition duration-700 ease-out group-hover:scale-[1.04] md:p-5"
@@ -139,7 +124,18 @@ export default function GarmentPage() {
               </div>
               <div className="mt-3 flex items-baseline justify-between gap-4">
                 <p className="font-display text-xs uppercase tracking-[0.12em] md:text-sm">{piece.name}</p>
-                <p className="shrink-0 font-mono text-[9px] uppercase tracking-[0.25em] text-gold">Coming soon</p>
+                {piece.status === "available" && piece.link ? (
+                  <a
+                    href={piece.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 font-mono text-[9px] uppercase tracking-[0.25em] text-gold underline-offset-4 hover:underline"
+                  >
+                    {pieceLabel(piece)} · Shop
+                  </a>
+                ) : (
+                  <p className="shrink-0 font-mono text-[9px] uppercase tracking-[0.25em] text-gold">{pieceLabel(piece)}</p>
+                )}
               </div>
             </li>
           ))}

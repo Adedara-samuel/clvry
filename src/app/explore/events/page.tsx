@@ -5,7 +5,7 @@ import { ExploreBoard, GalleryHeading } from "@/components/explore/explore-galle
 import { Playlists } from "@/components/explore/playlists";
 import { Shot } from "@/components/explore/shot";
 import { EarlyAccessButton } from "@/components/site/early-access-button";
-import { bannerPool, events } from "@/lib/explore";
+import { bannerPool, events, unplaced } from "@/lib/explore";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -55,6 +55,9 @@ const room = [
   events["gallery-night"],
   events["red-room"],
 ];
+
+// Anything added from the admin (or not placed above) joins the end of the board.
+room.push(...unplaced(events, [...formats.flatMap((f) => f.images), ...room, events["hands-up"], events["jesus-raves"]]));
 
 export default function EventsPage() {
   return (
