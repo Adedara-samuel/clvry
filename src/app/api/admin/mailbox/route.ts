@@ -1,6 +1,9 @@
 import { fail, guardAdmin } from "@/lib/admin/guard";
 import { readMailbox } from "@/lib/admin/gmail";
 
+// A cold read of a few hundred sign-up emails over IMAP can take 20–30s.
+export const maxDuration = 60;
+
 /** Subscribers and campaign history, read from Gmail. `?fresh=1` skips the one-minute cache. */
 export async function GET(request: Request) {
   const denied = await guardAdmin(request);

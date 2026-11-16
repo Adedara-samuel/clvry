@@ -7,7 +7,9 @@
       "PowerShell(npm install)",
       "PowerShell(npm install @tanstack/react-query @tanstack/react-query-devtools zustand zod clsx tailwind-merge)",
       "PowerShell(Select-String -Path src/components/brand/logo.tsx -Pattern '^export' | ForEach-Object { $_.Line }; Select-String -Path src/components/site/theme-toggle.tsx -Pattern 'export|use client' | ForEach-Object { $_.Line }; Select-String -Path src/app/globals.css -Pattern '--color-gold' | ForEach-Object { $_.Line.Trim\\(\\) })",
-      "PowerShell(npx tsc --noEmit 2>&1 | Select-Object -First 40; \"=== LINT ===\"; npx eslint src 2>&1 | Select-Object -First 60)"
+      "PowerShell(npx tsc --noEmit 2>&1 | Select-Object -First 40; \"=== LINT ===\"; npx eslint src 2>&1 | Select-Object -First 60)",
+      "PowerShell(npx next dev -p 3055)",
+      "PowerShell(node \"C:\\\\Users\\\\HomePC\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\6a4e48ec5ebd2ac4\\\\23798acf-2e46-4aca-b0c9-6949b31d9416\\\\scratchpad\\\\smoke.mjs\" http://localhost:3000)"
     ]
   }
 }

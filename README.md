@@ -273,6 +273,37 @@ The variables are validated with Zod on the first send. If any are missing, the 
 > you can send campaigns to, add a provider (Resend, Mailchimp, ConvertKit…) or a database
 > write next to `sendNotification()` in the route.
 
+## Admin portal
+
+`/admin` controls the site: **subscribers**, **email campaigns**, **site content** (popup, scripture ticker, socials, playlists), the **Explore galleries** and **products**. One admin account, set by `ADMIN_USERNAME` / `ADMIN_PASSWORD`.
+
+There is no database:
+
+- **Subscribers and campaign history come from Gmail.** Every sign-up already sends a `[CLVRY Website] New newsletter sign-up: …` email; unsubscribes and sent campaigns leave similar emails. The admin reads them back over IMAP with the SMTP account (`src/lib/admin/gmail.ts`). **Archive or label those emails freely, but don't delete them.**
+- **Campaigns send through the same Gmail** in batches of 20, each with a personal unsubscribe link and one-click `List-Unsubscribe` headers. A regular Gmail account sends about 500 a day (Workspace: 2,000); if a send stops part-way, "Retry the rest" picks it up.
+- **Content lives in `src/content/*.json`.** On the live site each save is a commit to GitHub (`GITHUB_TOKEN`), and Vercel redeploys in 1–2 minutes. In `npm run dev` without a token, saves write straight to the files.
+
+Protection: `src/proxy.ts` sends signed-out visitors to `/admin/login`; every admin API route re-checks the signed session cookie (HttpOnly, SameSite=Strict, 12 h) and the request's Origin. Logins are throttled.
+
+### Setting it up on Vercel
+
+1. **Gmail:** in Gmail → Settings → *Forwarding and POP/IMAP*, enable IMAP. The existing app password works for IMAP too.
+2. **GitHub token:** GitHub → Settings → Developer settings → *Fine-grained tokens* → new token, repository access *only this repo*, permission **Contents: Read and write**.
+3. **Vercel → Project → Settings → Environment Variables** (Production), add alongside the five SMTP ones:
+
+   | Variable | Value |
+   | --- | --- |
+   | `ADMIN_USERNAME` | `admin` |
+   | `ADMIN_PASSWORD` | a long password |
+   | `ADMIN_SESSION_SECRET` | 32+ random characters (`node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"`) |
+   | `SITE_URL` | the live address, e.g. `https://clvry.com` |
+   | `GITHUB_TOKEN` | the token from step 2 |
+   | `GITHUB_REPO` | `Adedara-samuel/clvry` |
+   | `GITHUB_BRANCH` | `main` |
+
+4. Make sure the Vercel project is connected to the GitHub repo (Settings → Git), so admin commits trigger a deploy.
+5. Redeploy, open `https://<your-site>/admin`, sign in, and check the **Setup** panel on the dashboard: every line should be ticked.
+
 ## Parked sections
 
 The Shop, Story and Circle Sessions sections are fully built but commented out of the page while everything is "coming soon". The step-by-step instructions to switch them back on are in the comment at the top of [`src/app/page.tsx`](src/app/page.tsx). In short:
