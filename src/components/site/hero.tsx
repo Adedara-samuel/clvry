@@ -1,17 +1,12 @@
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
-import { CrossMark, Wordmark } from "@/components/brand/logo";
 import { HeroStage } from "./hero-stage";
 import { Socials } from "./socials";
 import { ThemeToggle } from "./theme-toggle";
 
 /*
- * Opening sequence, once the intro screen lifts (timings in globals.css):
- *   1. The classic hero: cream (or black) with the wine glow, mark and wordmark.
- *   2. An iris opens from the cross and reveals the video underneath.
- *   3. Mark and wordmark dissolve, and their space closes so the CTA and socials settle centre.
- *   4. The video plays once and freezes on its final frame ("Welcome to CLVRY WRLD"), and the
- *      tagline arrives top-left.
+ * The video plays straight away, once, and freezes on its final frame ("Welcome to CLVRY WRLD");
+ * the tagline arrives top-left as it does. The Explore button and socials sit centre from the start.
  */
 export function Hero() {
   return (
@@ -39,11 +34,6 @@ export function Hero() {
       {/* A soft pool of light (cream) or shade (dark) so the text stays legible over the video. */}
       <div aria-hidden className="hero-pool absolute inset-0 -z-20" />
 
-      {/* The classic hero backdrop; the iris opens through it. */}
-      <div aria-hidden className="hero-cover absolute inset-0 -z-10 bg-background">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,var(--wine)_0%,transparent_60%)] opacity-(--glow)" />
-      </div>
-
       {/* Arrives as the video freezes (~3.6s), so it only ever sits on the footage: always cream. */}
       <p className="hero-in absolute top-1 left-5 font-display text-sm uppercase tracking-[0.2em] text-paper [text-shadow:0_1px_12px_rgb(0_0_0/0.45)] [--d:3.6s] md:top-5 md:left-10 md:text-base ">
         Christ Above All
@@ -53,18 +43,10 @@ export function Hero() {
       <ThemeToggle className="hero-in absolute top-4 right-5 text-white mix-blend-difference hover:text-white [--d:0.1s] md:right-8" />
 
       <div className="hero-ink flex flex-col items-center">
-        <div className="hero-brand">
-          <div className="hero-brand-inner flex flex-col items-center">
-            <div className="w-[min(64vw,320px)]">
-              <CrossMark className="w-full opacity-30" label="CLVRY — winged crucifix on the hill" />
-            </div>
-            <h1 className="mt-8 mb-5 w-[min(76vw,440px)] md:mt-10">
-              <Wordmark className="w-full opacity-30" label="CLVRY" />
-            </h1>
-          </div>
-        </div>
+        {/* The video says the name; the heading is for screen readers and search. */}
+        <h1 className="sr-only">CLVRY — Christ Above All</h1>
 
-        <div className="hero-in mt-5 [--d:0.3s]">
+        <div className="hero-in [--d:0.3s]">
           {/* Opens Explore on Ethos */}
           <Link
             href="/explore/ethos"
