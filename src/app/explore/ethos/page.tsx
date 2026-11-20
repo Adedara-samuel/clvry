@@ -170,7 +170,7 @@ export default function EthosPage() {
         <div className="mx-auto max-w-7xl">
           <GalleryHeading
             eyebrow="The board"
-            title="What we look at when we make"
+            title="Where we draw our inspiration from"
             note="Old masters and street signs, engravings and neon. The same story, told in every material."
           />
           <ExploreBoard images={board} className="mt-12 md:mt-16" />
