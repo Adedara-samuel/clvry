@@ -44,6 +44,7 @@ const featured = new Set<ExploreImage>([
   ethos.sanctuary,
   ethos.communion,
   ethos["glass-cross"],
+  ethos["red-crucifix"],
   ...pillars.map((p) => p.image),
 ]);
 const board = Object.values(ethos).filter((img) => !featured.has(img));
@@ -124,10 +125,10 @@ export default function EthosPage() {
         label="Sanctuary"
       />
 
-      {/* The mottos. Beside "Christ above all": every hand raised, the cross above them all. */}
+      {/* The mottos. Beside "Christ above all": the crucifix against wine-red. */}
       <section className="grid bg-wine text-paper md:grid-cols-2">
         <div className="relative md:h-full">
-          <Shot image={events["hands-up"]} crop="aspect-[4/5] md:aspect-auto md:h-full md:min-h-[36rem]" className="md:h-full" />
+          <Shot image={ethos["red-crucifix"]} crop="aspect-[4/5] md:aspect-auto md:h-full md:min-h-[36rem]" className="md:h-full" />
           {/* Wash the photo's edge into the wine panel: down on phones, across from md up */}
           <span
             aria-hidden

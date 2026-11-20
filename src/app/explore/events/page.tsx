@@ -46,7 +46,7 @@ const room = [
   events.praising,
   events["at-the-decks"],
   events["the-set"],
-  // hands-up stands beside "Christ above all" on the Ethos page instead
+  events["hands-up"],
   events["baroque-decks"],
   events["the-booth"],
   events["crowd-of-light"],
@@ -57,7 +57,7 @@ const room = [
 ];
 
 // Anything added from the admin (or not placed above) joins the end of the board.
-room.push(...unplaced(events, [...formats.flatMap((f) => f.images), ...room, events["hands-up"], events["jesus-raves"]]));
+room.push(...unplaced(events, [...formats.flatMap((f) => f.images), ...room, events["jesus-raves"]]));
 
 export default function EventsPage() {
   return (

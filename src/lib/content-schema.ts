@@ -109,7 +109,7 @@ export type ContentOf<K extends ContentKey> = z.infer<(typeof contentFiles)[K]["
  * page, so the admin protects them. Keep in sync when a page starts or stops using an image by name.
  */
 export const layoutImages: Record<GallerySection, readonly string[]> = {
-  ethos: ["sanctuary", "communion", "glass-cross", "carrying-the-cross", "praying-hands", "crown-of-thorns"],
+  ethos: ["sanctuary", "communion", "glass-cross", "red-crucifix", "carrying-the-cross", "praying-hands", "crown-of-thorns"],
   cathedrals: [],
   paintings: [],
   street: [],
