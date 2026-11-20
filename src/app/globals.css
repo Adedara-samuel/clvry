@@ -334,6 +334,34 @@ body::after {
   color: #f0e8dc;
 }
 
+/* While the video loads: plain black (no poster flash) and a small, faint spinner near the bottom. */
+.hero[data-loading] .hero-still {
+  background-image: none;
+}
+.hero-spinner {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-top-color: rgb(255 255 255 / 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  animation: hero-spin 0.9s linear infinite;
+}
+.hero[data-loading] .hero-spinner {
+  opacity: 1;
+}
+@keyframes hero-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* The button and socials rise in just after load; the tagline when the video freezes (~3.6s). */
 .hero-in {
   animation: hero-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s) both;
@@ -468,7 +496,8 @@ html {
     animation: none;
   }
   /* Skip straight to the end state: the final frame as a still. */
-  .hero-video {
+  .hero-video,
+  .hero-spinner {
     display: none;
   }
 }

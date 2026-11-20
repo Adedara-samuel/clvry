@@ -3,7 +3,7 @@ import { ExploreBanner } from "@/components/explore/explore-banner";
 import { ExploreNext } from "@/components/explore/explore-next";
 import { ExploreBoard, ExploreRail, GalleryHeading } from "@/components/explore/explore-gallery";
 import { Shot } from "@/components/explore/shot";
-import { bannerPool, cathedrals, ethos, events, paintings, type ExploreImage } from "@/lib/explore";
+import { bannerPool, cathedrals, ethos, paintings, type ExploreImage } from "@/lib/explore";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
